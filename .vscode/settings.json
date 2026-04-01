@@ -1,0 +1,12 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.removeUnusedImports": "never"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "git.enabled": false,
+    "emeraldwalk.runonsave": {
+        "match": ".*",
+        "cmd": "jj"
+    }
+}
