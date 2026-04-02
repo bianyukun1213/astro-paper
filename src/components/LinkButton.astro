@@ -11,8 +11,8 @@ const Button = disabled ? "span" : "a";
 <Button
   aria-disabled={disabled}
   class:list={[
-    "group inline-flex items-center gap-1",
-    { "hover:text-accent": !disabled },
+    "tw:group tw:inline-flex tw:items-center tw:gap-1",
+    { "tw:hover:text-accent": !disabled },
     className,
   ]}
   {...attrs}
