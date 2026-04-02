@@ -1,4 +1,4 @@
-@import "tailwindcss" prefix(tw);
+@import "tailwindcss";
 @import "./typography.css";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
@@ -31,19 +31,19 @@ html[data-theme="dark"] {
 
 @layer base {
   * {
-    @apply tw:border-border tw:outline-accent/75;
+    @apply border-border outline-accent/75;
     scrollbar-width: auto;
     scrollbar-color: var(--color-muted) transparent;
   }
   html {
-    @apply tw:overflow-y-scroll tw:scroll-smooth;
+    @apply overflow-y-scroll scroll-smooth;
   }
   body {
-    @apply tw:flex tw:min-h-svh tw:flex-col tw:bg-background tw:font-app tw:text-foreground tw:selection:bg-accent/75 tw:selection:text-background;
+    @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/75 selection:text-background;
   }
   a,
   button {
-    @apply tw:outline-offset-1 tw:outline-accent tw:focus-visible:no-underline tw:focus-visible:outline-2 tw:focus-visible:outline-dashed;
+    @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
@@ -52,15 +52,15 @@ html[data-theme="dark"] {
 }
 
 @utility max-w-app {
-  @apply tw:max-w-3xl;
+  @apply max-w-3xl;
 }
 
 @utility app-layout {
-  @apply tw:mx-auto tw:w-full tw:max-w-app tw:px-4;
+  @apply mx-auto w-full max-w-app px-4;
 }
 
 .active-nav {
-  @apply tw:underline tw:decoration-wavy tw:decoration-2 tw:underline-offset-8;
+  @apply underline decoration-wavy decoration-2 underline-offset-8;
 }
 
 /* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */

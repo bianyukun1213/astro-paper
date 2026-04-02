@@ -3,18 +3,18 @@
 @layer base {
   /* ===== Override default Tailwind Typography styles ===== */
   .app-prose {
-    @apply tw:prose;
+    @apply prose;
 
     h1,
     h2,
     h3,
     h4,
     th {
-      @apply tw:mb-3 tw:text-foreground;
+      @apply mb-3 text-foreground;
     }
 
     h3 {
-      @apply tw:italic;
+      @apply italic;
     }
 
     p,
@@ -24,96 +24,96 @@
     figcaption,
     table,
     code {
-      @apply tw:text-foreground;
+      @apply text-foreground;
     }
 
     a {
-      @apply tw:wrap-break-word tw:text-foreground tw:decoration-dashed tw:underline-offset-4 tw:hover:text-accent tw:focus-visible:no-underline;
+      @apply wrap-break-word text-foreground decoration-dashed underline-offset-4 hover:text-accent focus-visible:no-underline;
     }
 
     ul {
-      @apply tw:overflow-x-clip;
+      @apply overflow-x-clip;
     }
 
     li {
-      @apply tw:marker:text-accent;
+      @apply marker:text-accent;
     }
 
     hr {
-      @apply tw:border-border;
+      @apply border-border;
     }
 
     img {
-      @apply tw:mx-auto tw:border tw:border-border;
+      @apply mx-auto border border-border;
     }
 
     figcaption {
-      @apply tw:opacity-75;
+      @apply opacity-75;
     }
 
     table {
       th,
       td {
-        @apply tw:border tw:border-border tw:p-2;
+        @apply border border-border p-2;
       }
 
       th {
-        @apply tw:py-1.5;
+        @apply py-1.5;
       }
 
       code {
-        @apply tw:break-all tw:sm:break-normal;
+        @apply break-all sm:break-normal;
       }
     }
 
     code {
-      @apply tw:rounded tw:bg-muted/75 tw:p-1 tw:wrap-break-word tw:text-foreground tw:before:content-none tw:after:content-none;
+      @apply rounded bg-muted/75 p-1 wrap-break-word text-foreground before:content-none after:content-none;
     }
 
     .astro-code code {
-      @apply tw:flex-[1_0_100%] tw:bg-inherit tw:p-0;
+      @apply flex-[1_0_100%] bg-inherit p-0;
     }
 
     blockquote {
-      @apply tw:border-s-accent/80 tw:wrap-break-word tw:opacity-80;
+      @apply border-s-accent/80 wrap-break-word opacity-80;
     }
 
     details {
-      @apply tw:inline-block tw:cursor-pointer tw:text-foreground tw:select-none tw:[&_p]:hidden tw:[&_ul]:my-0!;
+      @apply inline-block cursor-pointer text-foreground select-none [&_p]:hidden [&_ul]:my-0!;
     }
 
     summary {
-      @apply tw:focus-visible:no-underline tw:focus-visible:outline-2 tw:focus-visible:outline-offset-1 tw:focus-visible:outline-accent tw:focus-visible:outline-dashed;
+      @apply focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent focus-visible:outline-dashed;
     }
 
     pre {
-      @apply tw:focus-visible:border-transparent tw:focus-visible:outline-2 tw:focus-visible:outline-accent tw:focus-visible:outline-dashed;
+      @apply focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed;
     }
   }
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
-    @apply tw:flex tw:border tw:bg-(--shiki-light-bg) tw:text-(--shiki-light) tw:outline-border tw:[&_span]:text-(--shiki-light);
+    @apply flex border bg-(--shiki-light-bg) text-(--shiki-light) outline-border [&_span]:text-(--shiki-light);
   }
 
   html[data-theme="dark"] .astro-code {
-    @apply tw:bg-(--shiki-dark-bg) tw:text-(--shiki-dark) tw:[&_span]:text-(--shiki-dark);
+    @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
   }
 
   /* Styles for Shiki transformers */
   /* https://shiki.style/packages/transformers */
   .astro-code {
     .line.diff.add {
-      @apply tw:relative tw:inline-block tw:w-full tw:bg-green-400/20 tw:before:absolute tw:before:-left-3 tw:before:text-green-500 tw:before:content-['+'];
+      @apply relative inline-block w-full bg-green-400/20 before:absolute before:-left-3 before:text-green-500 before:content-['+'];
     }
     .line.diff.remove {
-      @apply tw:relative tw:inline-block tw:w-full tw:bg-red-500/20 tw:before:absolute tw:before:-left-3 tw:before:text-red-500 tw:before:content-['-'];
+      @apply relative inline-block w-full bg-red-500/20 before:absolute before:-left-3 before:text-red-500 before:content-['-'];
     }
     .line.highlighted {
-      @apply tw:inline-block tw:w-full tw:bg-slate-400/20;
+      @apply inline-block w-full bg-slate-400/20;
     }
     .highlighted-word {
-      @apply tw:rounded-sm tw:border tw:border-border tw:px-0.5 tw:py-px;
+      @apply rounded-sm border border-border px-0.5 py-px;
     }
   }
 }

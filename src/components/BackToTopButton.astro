@@ -6,27 +6,27 @@ import IconArrowNarrowUp from "@/assets/icons/IconArrowNarrowUp.svg";
 <div
   id="btt-btn-container"
   class:list={[
-    "tw:fixed tw:end-4 tw:bottom-8 tw:z-50",
-    "tw:md:sticky tw:md:end-auto tw:md:float-end tw:md:me-1",
-    "tw:translate-y-14 tw:opacity-0 tw:transition tw:duration-500",
+    "fixed end-4 bottom-8 z-50",
+    "md:sticky md:end-auto md:float-end md:me-1",
+    "translate-y-14 opacity-0 transition duration-500",
   ]}
 >
   <button
     data-button="back-to-top"
     class:list={[
-      "tw:group tw:relative tw:bg-background tw:px-2 tw:py-1",
-      "tw:size-14 tw:rounded-full tw:shadow-xl",
-      "tw:md:h-8 tw:md:w-fit tw:md:rounded-md tw:md:shadow-none tw:md:focus-visible:rounded-none",
-      "tw:md:bg-background/35 tw:md:bg-clip-padding tw:md:backdrop-blur-lg",
+      "group relative bg-background px-2 py-1",
+      "size-14 rounded-full shadow-xl",
+      "md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none",
+      "md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg",
     ]}
   >
     <span
       id="progress-indicator"
-      class="tw:absolute tw:inset-0 tw:-z-10 tw:block tw:size-14 tw:scale-110 tw:rounded-full tw:bg-transparent tw:md:hidden tw:md:h-8 tw:md:rounded-md"
+      class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"
     ></span>
-    <IconChevronLeft class="tw:inline-block tw:rotate-90 tw:md:hidden" />
-    <span class="tw:sr-only tw:text-sm tw:group-hover:text-accent tw:md:not-sr-only">
-      <IconArrowNarrowUp class="tw:inline-block tw:size-4" />
+    <IconChevronLeft class="inline-block rotate-90 md:hidden" />
+    <span class="sr-only text-sm group-hover:text-accent md:not-sr-only">
+      <IconArrowNarrowUp class="inline-block size-4" />
       Back To Top
     </span>
   </button>
@@ -65,10 +65,10 @@ import IconArrowNarrowUp from "@/assets/icons/IconArrowNarrowUp.svg";
       const isVisible = scrollTop / scrollTotal > 0.3;
 
       if (isVisible !== lastVisible) {
-        btnContainer.classList.toggle("tw:opacity-100", isVisible);
-        btnContainer.classList.toggle("tw:translate-y-0", isVisible);
-        btnContainer.classList.toggle("tw:opacity-0", !isVisible);
-        btnContainer.classList.toggle("tw:translate-y-14", !isVisible);
+        btnContainer.classList.toggle("opacity-100", isVisible);
+        btnContainer.classList.toggle("translate-y-0", isVisible);
+        btnContainer.classList.toggle("opacity-0", !isVisible);
+        btnContainer.classList.toggle("translate-y-14", !isVisible);
         lastVisible = isVisible;
       }
     }
