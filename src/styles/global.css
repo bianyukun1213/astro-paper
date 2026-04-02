@@ -68,3 +68,70 @@ html[data-theme="dark"] {
 :target {
   scroll-margin-block: 1rem;
 }
+
+@utility ht-* {
+  height: --spacing(--value(number));
+}
+@utility ht-auto {
+  height: auto;
+}
+@utility ht-full {
+  height: 100%;
+}
+@utility ht-screen {
+  height: 100vw;
+}
+@utility ht-svh {
+  height: 100svh;
+}
+@utility ht-dvh {
+  height: 100dvh;
+}
+@utility ht-lvh {
+  height: 100lvh;
+}
+@utility ht-fit {
+  height: fit-content;
+}
+@utility ht-min {
+  height: min-content;
+}
+@utility ht-max {
+  height: max-content;
+}
+
+@utility height-do-not-use {
+  width: 100vw !important;
+  height: 100vh !important;
+  background: red !important;
+}
+@utility h-* {
+  @apply height-do-not-use;
+}
+@utility h-auto {
+  @apply height-do-not-use;
+}
+@utility h-full {
+  @apply height-do-not-use;
+}
+@utility h-screen {
+  @apply height-do-not-use;
+}
+@utility h-svh {
+  @apply height-do-not-use;
+}
+@utility h-dvh {
+  @apply height-do-not-use;
+}
+@utility h-lvh {
+  @apply height-do-not-use;
+}
+@utility h-fit {
+  @apply height-do-not-use;
+}
+@utility h-min {
+  @apply height-do-not-use;
+}
+@utility h-max {
+  @apply height-do-not-use;
+}
