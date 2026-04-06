@@ -1,6 +1,12 @@
-import * as messages from '@/paraglide/messages';
-import type { Locale } from '@/paraglide/runtime';
-import { getRelativeLocaleUrlList } from 'astro:i18n';
+import { DEFAULT_LOCALE } from "@/../astro.config";
+import { BLOG_PATH } from "@/content.config";
+import * as messages from "@/paraglide/messages";
+import type { Locale } from "@/paraglide/runtime";
+import {
+  getRelativeLocaleUrl as getRelativeLocaleUrlImpl,
+  getRelativeLocaleUrlList,
+} from "astro:i18n";
+
 // import { clsx, type ClassValue } from 'clsx';
 // import { twMerge } from 'tailwind-merge';
 
@@ -13,13 +19,42 @@ import { getRelativeLocaleUrlList } from 'astro:i18n';
  * @returns An array of available locales.
  */
 export function getLocales() {
-    const paths = getRelativeLocaleUrlList('', {
-        normalizeLocale: false
-    });
-    return paths.map((url) => {
-        const locale = url.split('/')[1];
-        return locale;
-    });
+  const paths = getRelativeLocaleUrlList("", {
+    normalizeLocale: false,
+  });
+  return paths.map(url => {
+    const locale = url.split("/")[1];
+    return locale;
+  });
+}
+
+/**
+ * Returns a localized URL based on the given locale and path. It uses Astro's i18n utility to generate the URL for the specified locale and path, without normalizing the locale.
+ * @param local The locale to use for the URL.
+ * @param path The path to localize.
+ * @returns The localized URL.
+ */
+export function getLocalizedUrl(local: Locale, path?: string) {
+  return getRelativeLocaleUrlImpl(local, path, {
+    normalizeLocale: false,
+  });
+}
+
+/**
+ * Get locale of a blog post
+ * @param filePath - the blog post full file location
+ * @returns locale, or default locale if locale is not found in the file path
+ */
+export function getLocaleFromFilePath(filePath: string | undefined): Locale {
+  if (!filePath) {
+    return DEFAULT_LOCALE;
+  }
+  const relative = filePath.replace(BLOG_PATH + "/", "");
+  const firstSegment = relative.split("/")[0];
+  if (getLocales().includes(firstSegment)) {
+    return firstSegment as Locale;
+  }
+  return DEFAULT_LOCALE;
 }
 
 /**
@@ -28,25 +63,26 @@ export function getLocales() {
  * @returns A proxy object for accessing translations.
  */
 export function useTranslations(locale: Locale) {
-    return new Proxy(messages, {
-        get(target, prop: keyof typeof messages) {
-            const original = target[prop];
-            if (typeof original === 'function') {
-                type ParaglideMessageFn = (
-                    inputs?: unknown,
-                    options?: { locale?: Locale }
-                ) => string;
-                return (inputs?: unknown, options?: { locale?: Locale }) => {
-                    return (original as ParaglideMessageFn)(inputs, {
-                        locale,
-                        ...options
-                    });
-                };
-            }
-            return original;
-        }
-    }) as typeof messages;
+  return new Proxy(messages, {
+    get(target, prop: keyof typeof messages) {
+      const original = target[prop];
+      if (typeof original === "function") {
+        type ParaglideMessageFn = (
+          inputs?: unknown,
+          options?: { locale?: Locale }
+        ) => string;
+        return (inputs?: unknown, options?: { locale?: Locale }) => {
+          return (original as ParaglideMessageFn)(inputs, {
+            locale,
+            ...options,
+          });
+        };
+      }
+      return original;
+    },
+  }) as typeof messages;
 }
 
+export { DEFAULT_LOCALE };
 export type { Locale };
 

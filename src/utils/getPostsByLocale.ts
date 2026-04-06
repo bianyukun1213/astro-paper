@@ -1,6 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import { getLocaleFromFilePath } from "./getPath";
-import type { Locale } from "./locale";
+import { getLocaleFromFilePath, type Locale } from "./locale";
 
 /**
  * Get blog posts by locale

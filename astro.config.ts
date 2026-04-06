@@ -12,6 +12,8 @@ import remarkToc from "remark-toc";
 import { SITE } from "./src/config";
 import { transformerFileName } from "./src/utils/transformers/fileName";
 
+export const DEFAULT_LOCALE = "en-US" as const;
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
@@ -59,7 +61,7 @@ export default defineConfig({
   },
   i18n: {
     locales: ["en-US", "zh-CN", "ru-RU"],
-    defaultLocale: "en-US",
+    defaultLocale: DEFAULT_LOCALE,
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: true,

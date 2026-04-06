@@ -26,7 +26,6 @@ const m = useTranslations(currentLocale);
 
 const allPosts = await getCollection("blog");
 const posts = getPostsByLocale(allPosts, currentLocale);
-
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);

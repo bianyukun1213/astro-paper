@@ -2,8 +2,8 @@
 author: Sat Naing
 pubDatetime: 2022-09-23T04:58:53Z
 modDatetime: 2026-01-10T13:04:53.851Z
-title: How to configure AstroPaper theme
-slug: abcdefg-en-us
+title: 如何配置 AstroPaper 主题
+slug: abcdefg-zh-cn
 displayId: abcdefg
 featured: true
 draft: false
