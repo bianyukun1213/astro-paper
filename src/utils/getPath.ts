@@ -38,10 +38,14 @@ export function getPath(
       : "/posts";
   }
 
+  // Making sure `displayId` does not contain the directory
+  const blogId = displayId.split("/");
+  const slug = blogId.length > 0 ? blogId.slice(-1) : blogId;
+
   // If not inside the sub-dir, simply return the file path
   if (!pathSegments || pathSegments.length < 1) {
-    return [basePath, displayId].join("/") + "/";
+    return [basePath, slug].join("/") + "/";
   }
 
-  return [basePath, ...pathSegments, displayId].join("/") + "/";
+  return [basePath, ...pathSegments, slug].join("/") + "/";
 }
