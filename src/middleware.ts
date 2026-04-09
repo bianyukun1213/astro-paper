@@ -1,14 +1,9 @@
 import { defineMiddleware } from "astro:middleware";
 
-// `context` 和 `next` 会自动被类型化
+// bug，使用动态路由和 trailingSlash: always 时，生成的路由末尾带 /。暂时使用这种方式来缓解问题，使得去掉 / 也能访问 rss 数据。
 export const onRequest = defineMiddleware((context, next) => {
   if (context.url.pathname.endsWith("/rss.xml")) {
-    const newUrl = context.url;
-    newUrl.hash = "";
-    newUrl.search = "";
-    newUrl.pathname += "/";
-    console.log("aaa: " + newUrl.pathname);
-    return next(newUrl.pathname);
+    return context.rewrite(context.url.pathname + "/");
   }
   return next();
 });
