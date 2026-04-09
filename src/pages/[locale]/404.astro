@@ -4,8 +4,20 @@ import Header from "@/components/Header.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import { SITE } from "@/config";
 import Layout from "@/layouts/Layout.astro";
-import { useTranslations, type Locale } from "@/utils/locale";
+import {
+getLocales,
+getLocalizedUrl,
+useTranslations,
+type Locale,
+} from "@/utils/locale";
+import type { GetStaticPaths } from "astro";
 
+export const getStaticPaths = (async () => {
+  const locales = getLocales();
+  return locales.map(locale => ({
+    params: { locale },
+  }));
+}) satisfies GetStaticPaths;
 const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
 ---
@@ -22,7 +34,7 @@ const m = useTranslations(currentLocale);
       <span aria-hidden="true">¯\_(ツ)_/¯</span>
       <p class="mt-4 text-2xl sm:text-3xl">Page Not Found</p>
       <LinkButton
-        href="/"
+        href={getLocalizedUrl(currentLocale, "/")}
         class="my-6 text-lg underline decoration-dashed underline-offset-8"
       >
         Go back home

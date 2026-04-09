@@ -1,33 +1,38 @@
 ---
-import { getCollection } from "astro:content";
-import type { GetStaticPathsOptions } from "astro";
-import Main from "@/layouts/Main.astro";
-import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
 import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
 import Pagination from "@/components/Pagination.astro";
-import getUniqueTags from "@/utils/getUniqueTags";
-import getPostsByTag from "@/utils/getPostsByTag";
 import { SITE } from "@/config";
+import Layout from "@/layouts/Layout.astro";
+import Main from "@/layouts/Main.astro";
+import { getPostsByLocale } from "@/utils/getPostsByLocale";
+import getPostsByTag from "@/utils/getPostsByTag";
+import getUniqueTags from "@/utils/getUniqueTags";
+import { getLocaleFromFilePath } from "@/utils/locale";
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
 
-export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const posts = await getCollection("blog");
-  const tags = getUniqueTags(posts);
-
-  return tags.flatMap(({ tag, tagName }) => {
-    const tagPosts = getPostsByTag(posts, tag);
-
-    return paginate(tagPosts, {
-      params: { tag },
-      props: { tagName },
-      pageSize: SITE.postPerPage,
+export const getStaticPaths = (async ({ paginate }) => {
+  const allPosts = await getCollection("blog");
+  const localesInUse = [
+    ...new Set(allPosts.map(post => getLocaleFromFilePath(post.filePath))),
+  ];
+  return localesInUse.flatMap(locale => {
+    const localePosts = getPostsByLocale(allPosts, locale);
+    const tags = getUniqueTags(localePosts);
+    return tags.flatMap(({ tag, tagName }) => {
+      const tagPosts = getPostsByTag(localePosts, tag);
+      return paginate(tagPosts, {
+        params: { locale, tag },
+        props: { tagName },
+        pageSize: SITE.postPerPage,
+      });
     });
   });
-}
+}) satisfies GetStaticPaths;
 
-const params = Astro.params;
-const { tag } = params;
+const { tag } = Astro.params;
 const { page, tagName } = Astro.props;
 ---
 

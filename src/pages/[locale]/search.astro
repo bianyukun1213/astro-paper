@@ -5,8 +5,20 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { SITE } from "@/config";
-import { getLocalizedUrl, useTranslations, type Locale } from "@/utils/locale";
+import {
+  getLocales,
+  getLocalizedUrl,
+  useTranslations,
+  type Locale,
+} from "@/utils/locale";
+import type { GetStaticPaths } from "astro";
 
+export const getStaticPaths = (async () => {
+  const locales = getLocales();
+  return locales.map(locale => ({
+    params: { locale },
+  }));
+}) satisfies GetStaticPaths;
 const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
 

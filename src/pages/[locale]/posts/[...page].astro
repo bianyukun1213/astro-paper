@@ -6,6 +6,7 @@ import Pagination from "@/components/Pagination.astro";
 import { SITE } from "@/config";
 import Layout from "@/layouts/Layout.astro";
 import Main from "@/layouts/Main.astro";
+import { getPostsByLocale } from "@/utils/getPostsByLocale";
 import getSortedPosts from "@/utils/getSortedPosts";
 import { getLocaleFromFilePath } from "@/utils/locale";
 import type { GetStaticPaths } from "astro";
@@ -16,14 +17,13 @@ export const getStaticPaths = (async ({ paginate }) => {
   const localesInUse = [
     ...new Set(allPosts.map(post => getLocaleFromFilePath(post.filePath))),
   ];
-  return localesInUse.flatMap(locale =>
-    paginate(
-      getSortedPosts(
-        allPosts.filter(post => getLocaleFromFilePath(post.filePath) === locale)
-      ),
-      { params: { locale }, pageSize: SITE.postPerPage }
-    )
-  );
+  return localesInUse.flatMap(locale => {
+    const localePosts = getPostsByLocale(allPosts, locale);
+    return paginate(getSortedPosts(localePosts), {
+      params: { locale },
+      pageSize: SITE.postPerPage,
+    });
+  });
 }) satisfies GetStaticPaths;
 
 // const currentLocale = Astro.currentLocale as Locale;

@@ -4,6 +4,7 @@ import { ClientRouter } from "astro:transitions";
 import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
 import { SITE } from "@/config";
 import "@/styles/global.css";
+import { getLocalizedUrl, type Locale } from "@/utils/locale";
 
 type Props = {
   title?: string;
@@ -28,6 +29,8 @@ const {
   modDatetime,
   scrollSmooth = false,
 } = Astro.props;
+
+const currentLocale = Astro.currentLocale as Locale;
 
 const socialImageURL = new URL(ogImage, Astro.url);
 
@@ -118,7 +121,10 @@ const structuredData = {
       rel="alternate"
       type="application/rss+xml"
       title={SITE.title}
-      href={new URL("rss.xml", Astro.site)}
+      href={new URL(
+        getLocalizedUrl(currentLocale, "/rss.xml").slice(0, -1),
+        Astro.site
+      )}
     />
 
     <meta name="theme-color" content="" />

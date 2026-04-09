@@ -7,15 +7,18 @@ import Layout from "@/layouts/Layout.astro";
 import Main from "@/layouts/Main.astro";
 import getPostsByGroupCondition from "@/utils/getPostsByGroupCondition";
 import { getPostsByLocale } from "@/utils/getPostsByLocale";
-import { getLocales, type Locale } from "@/utils/locale";
+import { getLocales, useTranslations, type Locale } from "@/utils/locale";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 
 export const getStaticPaths = (async () => {
-  return getLocales().map(locale => ({
+  const locales = getLocales();
+  return locales.map(locale => ({
     params: { locale },
   }));
 }) satisfies GetStaticPaths;
+const currentLocale = Astro.currentLocale as Locale;
+const m = useTranslations(currentLocale);
 
 // Redirect to 404 page if `showArchives` config is false
 if (!SITE.showArchives) {
@@ -23,7 +26,7 @@ if (!SITE.showArchives) {
 }
 
 const allPosts = await getCollection("blog", ({ data }) => !data.draft);
-const posts = getPostsByLocale(allPosts, Astro.currentLocale as Locale);
+const posts = getPostsByLocale(allPosts, currentLocale);
 
 const months = [
   "January",

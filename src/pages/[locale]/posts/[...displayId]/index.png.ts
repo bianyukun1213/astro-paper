@@ -5,21 +5,6 @@ import { getLocaleFromFilePath } from "@/utils/locale";
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
-// export async function getStaticPaths() {
-//   if (!SITE.dynamicOgImage) {
-//     return [];
-//   }
-
-//   const posts = await getCollection("blog").then(p =>
-//     p.filter(({ data }) => !data.draft && !data.ogImage)
-//   );
-
-//   return posts.map(post => ({
-//     params: { slug: getPath(post.id, post.filePath, false) },
-//     props: post,
-//   }));
-// }
-
 export const getStaticPaths = (async () => {
   if (!SITE.dynamicOgImage) {
     return [];

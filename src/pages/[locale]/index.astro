@@ -118,7 +118,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
     }
 
     <div class="my-8 text-center">
-      <LinkButton href={getLocalizedUrl(currentLocale, "/posts")}>
+      <LinkButton href={getLocalizedUrl(currentLocale, "/posts/")}>
         All Posts
         <IconArrowRight class="inline-block rtl:-rotate-180" />
       </LinkButton>
@@ -131,8 +131,9 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
   document.addEventListener("astro:page-load", () => {
     const indexLayout = (document.querySelector("#main-content") as HTMLElement)
       ?.dataset?.layout;
+    const locale = window.location.pathname.split("/")[1];
     if (indexLayout) {
-      sessionStorage.setItem("backUrl", "/");
+      sessionStorage.setItem("backUrl", locale ? `/${locale}/` : "/");
     }
   });
 </script>
