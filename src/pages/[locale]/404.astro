@@ -2,10 +2,10 @@
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import LinkButton from "@/components/LinkButton.astro";
-import { SITE } from "@/config";
 import Layout from "@/layouts/Layout.astro";
 import {
 getLocales,
+getLocalizedSite,
 getLocalizedUrl,
 useTranslations,
 type Locale,
@@ -20,9 +20,10 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
+const localSite = getLocalizedSite(currentLocale);
 ---
 
-<Layout title={`404 Not Found | ${SITE.title}`}>
+<Layout title={`404 Not Found | ${localSite.title}`}>
   <Header />
 
   <main

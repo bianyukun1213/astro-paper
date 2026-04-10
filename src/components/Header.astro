@@ -7,9 +7,10 @@ import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import LinkButton from "./LinkButton.astro";
 import { SITE } from "@/config";
-import { getLocalizedUrl, type Locale } from "@/utils/locale";
+import { getLocalizedSite, getLocalizedUrl, type Locale } from "@/utils/locale";
 
 const currentLocale = Astro.currentLocale as Locale;
+const localSite = getLocalizedSite(currentLocale);
 
 const { pathname } = Astro.url;
 
@@ -49,7 +50,7 @@ const isActive = (path: string) => {
       href={getLocalizedUrl(currentLocale, "/")}
       class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"
     >
-      {SITE.title}
+      {localSite.title}
     </a>
     <nav
       id="nav-menu"

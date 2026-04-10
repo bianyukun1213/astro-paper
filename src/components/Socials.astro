@@ -1,6 +1,10 @@
 ---
-import { SOCIALS } from "@/constants";
+import { getLocalizedSocials } from "@/constants";
+import type { Locale } from "@/utils/locale";
 import LinkButton from "./LinkButton.astro";
+
+const currentLocale = Astro.currentLocale as Locale;
+const SOCIALS = getLocalizedSocials(currentLocale);
 ---
 
 <div class="flex flex-wrap items-center gap-1">

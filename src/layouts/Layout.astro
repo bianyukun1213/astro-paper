@@ -4,7 +4,7 @@ import { ClientRouter } from "astro:transitions";
 import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
 import { SITE } from "@/config";
 import "@/styles/global.css";
-import { getLocaleDir, getLocalizedUrl, type Locale } from "@/utils/locale";
+import { getLocaleDir, getLocalizedSite, getLocalizedUrl, type Locale } from "@/utils/locale";
 
 type Props = {
   title?: string;
@@ -18,11 +18,14 @@ type Props = {
   scrollSmooth?: boolean;
 };
 
+const currentLocale = Astro.currentLocale as Locale;
+const localSite = getLocalizedSite(currentLocale);
+
 const {
-  title = SITE.title,
-  author = SITE.author,
+  title = localSite.title,
+  author = localSite.author,
   profile = SITE.profile,
-  description = SITE.desc,
+  description = localSite.desc,
   ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
   canonicalURL = new URL(Astro.url.pathname, Astro.url),
   pubDatetime,
@@ -45,7 +48,6 @@ const localeFonts = {
   },
 } as const;
 
-const currentLocale = Astro.currentLocale as Locale;
 const localeFont =
   localeFonts[currentLocale as keyof typeof localeFonts] ?? localeFonts.default;
 
@@ -139,7 +141,7 @@ const structuredData = {
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={SITE.title}
+      title={localSite.title}
       href={new URL(
         getLocalizedUrl(currentLocale, "/rss.xml").slice(0, -1),
         Astro.site

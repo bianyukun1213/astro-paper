@@ -2,12 +2,11 @@
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import Tag from "@/components/Tag.astro";
-import { SITE } from "@/config";
 import Layout from "@/layouts/Layout.astro";
 import Main from "@/layouts/Main.astro";
 import { getPostsByLocale } from "@/utils/getPostsByLocale";
 import getUniqueTags from "@/utils/getUniqueTags";
-import { getLocales, useTranslations, type Locale } from "@/utils/locale";
+import { getLocales, getLocalizedSite, useTranslations, type Locale } from "@/utils/locale";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 
@@ -19,6 +18,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
+const localSite = getLocalizedSite(currentLocale);
 
 const allPosts = await getCollection("blog");
 const posts = getPostsByLocale(allPosts, currentLocale);
@@ -26,7 +26,7 @@ const posts = getPostsByLocale(allPosts, currentLocale);
 let tags = getUniqueTags(posts);
 ---
 
-<Layout title={`Tags | ${SITE.title}`}>
+<Layout title={`Tags | ${localSite.title}`}>
   <Header />
   <Main pageTitle="Tags" pageDesc="All the tags used in posts.">
     <ul class="flex flex-wrap gap-6">

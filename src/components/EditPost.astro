@@ -1,7 +1,8 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import IconEdit from "@/assets/icons/IconEdit.svg";
 import { SITE } from "@/config";
+import { getLocalizedSite, type Locale } from "@/utils/locale";
+import type { CollectionEntry } from "astro:content";
 
 type Props = {
   hideEditPost?: CollectionEntry<"blog">["data"]["hideEditPost"];
@@ -11,6 +12,8 @@ type Props = {
 
 const { hideEditPost, post, class: className = "" } = Astro.props;
 
+const currentLocale = Astro.currentLocale as Locale;
+const localSite = getLocalizedSite(currentLocale);
 const href = `${SITE.editPost.url}${post.filePath}`;
 const showEditPost =
   SITE.editPost.enabled && !hideEditPost && href.trim() !== "";
@@ -28,7 +31,7 @@ const showEditPost =
       ]}
     >
       <IconEdit class="inline-block" />
-      <span>{SITE.editPost.text}</span>
+      <span>{localSite.editPost.text}</span>
     </a>
   )
 }

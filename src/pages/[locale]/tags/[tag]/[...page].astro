@@ -9,7 +9,7 @@ import Main from "@/layouts/Main.astro";
 import { getPostsByLocale } from "@/utils/getPostsByLocale";
 import getPostsByTag from "@/utils/getPostsByTag";
 import getUniqueTags from "@/utils/getUniqueTags";
-import { getLocaleFromFilePath } from "@/utils/locale";
+import { getLocaleFromFilePath, getLocalizedSite, type Locale } from "@/utils/locale";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 
@@ -34,9 +34,11 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 const { tag } = Astro.params;
 const { page, tagName } = Astro.props;
+const currentLocale = Astro.currentLocale as Locale;
+const localSite = getLocalizedSite(currentLocale);
 ---
 
-<Layout title={`Tag: ${tagName} | ${SITE.title}`}>
+<Layout title={`Tag: ${tagName} | ${localSite.title}`}>
   <Header />
   <Main
     pageTitle={[`Tag:`, `${tagName}`]}

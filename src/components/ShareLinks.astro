@@ -1,6 +1,10 @@
 ---
-import { SHARE_LINKS } from "@/constants";
+import { getLocalizedShareLinks } from "@/constants";
+import type { Locale } from "@/utils/locale";
 import LinkButton from "./LinkButton.astro";
+
+const currentLocale = Astro.currentLocale as Locale;
+const SHARE_LINKS = getLocalizedShareLinks(currentLocale);
 
 const URL = Astro.url;
 ---

@@ -1,17 +1,19 @@
 ---
-import type { MarkdownLayoutProps } from "astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { getLocalizedSite, type Locale } from "@/utils/locale";
+import type { MarkdownLayoutProps } from "astro";
 import Layout from "./Layout.astro";
-import { SITE } from "@/config";
 
 type Props = MarkdownLayoutProps<{ title: string }>;
 
 const { frontmatter } = Astro.props;
+const currentLocale = Astro.currentLocale as Locale;
+const localSite = getLocalizedSite(currentLocale);
 ---
 
-<Layout title={`${frontmatter.title} | ${SITE.title}`}>
+<Layout title={`${frontmatter.title} | ${localSite.title}`}>
   <Header />
   <Breadcrumb />
   <main id="main-content" class="app-layout">
