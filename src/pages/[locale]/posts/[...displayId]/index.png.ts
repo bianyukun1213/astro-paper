@@ -1,7 +1,7 @@
 import { SITE } from "@/config";
 import { generateOgImageForPost } from "@/utils/generateOgImages";
 import { getPath } from "@/utils/getPath";
-import { getLocaleFromFilePath } from "@/utils/locale";
+import { getLocaleFromFilePath, type Locale } from "@/utils/locale";
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
@@ -24,12 +24,12 @@ export const getStaticPaths = (async () => {
         ),
         locale: postLocale,
       },
-      props: { post },
+      props: post,
     };
   });
 }) satisfies GetStaticPaths;
 
-export const GET: APIRoute = async ({ props }) => {
+export const GET: APIRoute = async ({ params, props }) => {
   if (!SITE.dynamicOgImage) {
     return new Response(null, {
       status: 404,
@@ -37,7 +37,10 @@ export const GET: APIRoute = async ({ props }) => {
     });
   }
 
-  const buffer = await generateOgImageForPost(props as CollectionEntry<"blog">);
+  const buffer = await generateOgImageForPost(
+    props as CollectionEntry<"blog">,
+    params.locale as Locale
+  );
   return new Response(new Uint8Array(buffer), {
     headers: { "Content-Type": "image/png" },
   });

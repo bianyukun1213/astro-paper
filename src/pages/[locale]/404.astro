@@ -5,7 +5,6 @@ import LinkButton from "@/components/LinkButton.astro";
 import Layout from "@/layouts/Layout.astro";
 import {
 getLocales,
-getLocalizedSite,
 getLocalizedUrl,
 useTranslations,
 type Locale,
@@ -20,10 +19,9 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
-const localSite = getLocalizedSite(currentLocale);
 ---
 
-<Layout title={`404 Not Found | ${localSite.title}`}>
+<Layout title={`404 Not Found | ${m.site_title()}`}>
   <Header />
 
   <main

@@ -1,8 +1,10 @@
-import satori from "satori";
 import { SITE } from "@/config";
+import satori from "satori";
 import loadGoogleFonts from "../loadGoogleFont";
+import { useTranslations } from "../locale";
 
-export default async () => {
+export default async locale => {
+  const m = useTranslations(locale);
   return satori(
     {
       type: "div",
@@ -78,14 +80,14 @@ export default async () => {
                             type: "p",
                             props: {
                               style: { fontSize: 72, fontWeight: "bold" },
-                              children: SITE.title,
+                              children: m.site_title(),
                             },
                           },
                           {
                             type: "p",
                             props: {
                               style: { fontSize: 28 },
-                              children: SITE.desc,
+                              children: m.site_desc(),
                             },
                           },
                         ],
@@ -122,7 +124,9 @@ export default async () => {
       width: 1200,
       height: 630,
       embedFont: true,
-      fonts: await loadGoogleFonts(SITE.title + SITE.desc + SITE.website),
+      fonts: await loadGoogleFonts(
+        m.site_title() + m.site_desc() + SITE.website
+      ),
     }
   );
 };

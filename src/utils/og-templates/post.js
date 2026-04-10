@@ -1,7 +1,7 @@
 import satori from "satori";
 // import { html } from "satori-html";
-import { SITE } from "@/config";
 import loadGoogleFonts from "../loadGoogleFont";
+import { useTranslations } from "../locale";
 
 // const markup = html`<div
 //       style={{
@@ -93,7 +93,8 @@ import loadGoogleFonts from "../loadGoogleFont";
 //       </div>
 //     </div>`;
 
-export default async post => {
+export default async (post, locale) => {
+  const m = useTranslations(locale);
   return satori(
     {
       type: "div",
@@ -178,14 +179,6 @@ export default async post => {
                             type: "span",
                             props: {
                               children: [
-                                "by ",
-                                {
-                                  type: "span",
-                                  props: {
-                                    style: { color: "transparent" },
-                                    children: '"',
-                                  },
-                                },
                                 {
                                   type: "span",
                                   props: {
@@ -203,7 +196,7 @@ export default async post => {
                             type: "span",
                             props: {
                               style: { overflow: "hidden", fontWeight: "bold" },
-                              children: SITE.title,
+                              children: m.site_title(),
                             },
                           },
                         ],
@@ -222,7 +215,7 @@ export default async post => {
       height: 630,
       embedFont: true,
       fonts: await loadGoogleFonts(
-        post.data.title + post.data.author + SITE.title + "by"
+        post.data.title + post.data.author + m.site_title()
       ),
     }
   );

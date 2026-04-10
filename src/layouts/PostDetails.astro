@@ -14,7 +14,7 @@ import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
 import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
 import { SITE } from "@/config";
-import { getLocalizedSite, type Locale } from "@/utils/locale";
+import { useTranslations, type Locale } from "@/utils/locale";
 
 type Props = {
   post: CollectionEntry<"blog">;
@@ -39,7 +39,7 @@ const {
 const { Content } = await render(post);
 
 const currentLocale = Astro.currentLocale as Locale;
-const localSite = getLocalizedSite(currentLocale);
+const m = useTranslations(currentLocale);
 
 let ogImageUrl: string | undefined;
 
@@ -61,7 +61,7 @@ const ogImage = ogImageUrl
   : undefined;
 
 const layoutProps = {
-  title: `${title} | ${localSite.title}`,
+  title: `${title} | ${m.site_title()}`,
   author,
   description,
   pubDatetime,

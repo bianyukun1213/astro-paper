@@ -7,7 +7,7 @@ import Layout from "@/layouts/Layout.astro";
 import Main from "@/layouts/Main.astro";
 import getPostsByGroupCondition from "@/utils/getPostsByGroupCondition";
 import { getPostsByLocale } from "@/utils/getPostsByLocale";
-import { getLocales, getLocalizedSite, useTranslations, type Locale } from "@/utils/locale";
+import { getLocales, useTranslations, type Locale } from "@/utils/locale";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 
@@ -19,7 +19,6 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
-const localSite = getLocalizedSite(currentLocale);
 
 // Redirect to 404 page if `showArchives` config is false
 if (!SITE.showArchives) {
@@ -45,7 +44,7 @@ const months = [
 ];
 ---
 
-<Layout title={`Archives | ${localSite.title}`}>
+<Layout title={`Archives | ${m.site_title()}`}>
   <Header />
   <Main pageTitle="Archives" pageDesc="All the articles I've archived.">
     {

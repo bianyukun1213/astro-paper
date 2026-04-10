@@ -1,5 +1,4 @@
 import { DEFAULT_LOCALE } from "@/../astro.config";
-import { SITE } from "@/config";
 import { BLOG_PATH } from "@/content.config";
 import * as messages from "@/paraglide/messages";
 import { getTextDirection, type Locale } from "@/paraglide/runtime";
@@ -95,18 +94,4 @@ export function useTranslations(locale: Locale) {
 
 export { DEFAULT_LOCALE };
 export type { Locale };
-
-export function getLocalizedSite(locale: Locale) {
-  const t = useTranslations(locale);
-  return {
-    ...SITE,
-    title: t.site_title(),
-    author: t.site_author(),
-    desc: t.site_desc(),
-    editPost: {
-      ...SITE.editPost,
-      text: t.edit_page(),
-    },
-  };
-}
 

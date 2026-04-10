@@ -7,7 +7,6 @@ import Footer from "@/components/Footer.astro";
 import { SITE } from "@/config";
 import {
   getLocales,
-  getLocalizedSite,
   getLocalizedUrl,
   useTranslations,
   type Locale,
@@ -22,14 +21,13 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
-const localSite = getLocalizedSite(currentLocale);
 
 const backUrl = SITE.showBackButton
   ? `${Astro.url.pathname}`
   : getLocalizedUrl(currentLocale, "/");
 ---
 
-<Layout title={`Search | ${localSite.title}`}>
+<Layout title={`Search | ${m.site_title()}`}>
   <Header />
   <Main pageTitle="Search" pageDesc="Search any article ...">
     <div id="pagefind-search" transition:persist data-backurl={backUrl}></div>

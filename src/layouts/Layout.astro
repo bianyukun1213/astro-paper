@@ -4,7 +4,7 @@ import { ClientRouter } from "astro:transitions";
 import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
 import { SITE } from "@/config";
 import "@/styles/global.css";
-import { getLocaleDir, getLocalizedSite, getLocalizedUrl, type Locale } from "@/utils/locale";
+import { getLocaleDir, getLocalizedUrl, useTranslations, type Locale } from "@/utils/locale";
 
 type Props = {
   title?: string;
@@ -19,13 +19,13 @@ type Props = {
 };
 
 const currentLocale = Astro.currentLocale as Locale;
-const localSite = getLocalizedSite(currentLocale);
+const m = useTranslations(currentLocale);
 
 const {
-  title = localSite.title,
-  author = localSite.author,
+  title = m.site_title(),
+  author = m.site_author(),
   profile = SITE.profile,
-  description = localSite.desc,
+  description = m.site_desc(),
   ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
   canonicalURL = new URL(Astro.url.pathname, Astro.url),
   pubDatetime,
@@ -40,11 +40,11 @@ const localeFonts = {
   },
   "en-US": {
     cssVariable: "--font-noto-sans",
-    preload: false
+    preload: false,
   },
   "zh-CN": {
     cssVariable: "--font-noto-sans-sc",
-    preload: false
+    preload: false,
   },
 } as const;
 
@@ -141,7 +141,7 @@ const structuredData = {
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={localSite.title}
+      title={m.site_title()}
       href={new URL(
         getLocalizedUrl(currentLocale, "/rss.xml").slice(0, -1),
         Astro.site

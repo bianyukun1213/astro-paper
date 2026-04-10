@@ -8,7 +8,7 @@ import Layout from "@/layouts/Layout.astro";
 import Main from "@/layouts/Main.astro";
 import { getPostsByLocale } from "@/utils/getPostsByLocale";
 import getSortedPosts from "@/utils/getSortedPosts";
-import { getLocaleFromFilePath, getLocalizedSite, type Locale } from "@/utils/locale";
+import { getLocaleFromFilePath, useTranslations, type Locale } from "@/utils/locale";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 
@@ -29,10 +29,10 @@ export const getStaticPaths = (async ({ paginate }) => {
 // const currentLocale = Astro.currentLocale as Locale;
 const { page } = Astro.props;
 const currentLocale = Astro.currentLocale as Locale;
-const localSite = getLocalizedSite(currentLocale);
+const m = useTranslations(currentLocale);
 ---
 
-<Layout title={`Posts | ${localSite.title}`}>
+<Layout title={`Posts | ${m.site_title()}`}>
   <Header />
   <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
     <ul>
