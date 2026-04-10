@@ -72,7 +72,8 @@ export function getLocaleFromFilePath(filePath: string | undefined): Locale {
  * @returns A proxy object for accessing translations.
  */
 export function useTranslations(locale: Locale) {
-  return new Proxy(messages, {
+  const messagesObj = { ...messages };
+  return new Proxy(messagesObj, {
     get(target, prop: keyof typeof messages) {
       const original = target[prop];
       if (typeof original === "function") {
