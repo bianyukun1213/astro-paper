@@ -20,8 +20,20 @@ html[data-theme="dark"] {
   --border: #ab4b08;
 }
 
+html {
+  --font-locale: var(--font-google-sans-code);
+}
+
+html[lang="en-US"] {
+  --font-locale: var(--font-noto-sans);
+}
+
+html[lang="zh-CN"] {
+  --font-locale: var(--font-noto-sans-sc);
+}
+
 @theme inline {
-  --font-app: var(--font-google-sans-code);
+  --font-app: var(--font-locale);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
@@ -134,4 +146,9 @@ html[data-theme="dark"] {
 }
 @utility h-max {
   @apply height-do-not-use;
+}
+
+html[lang="zh-CN"] #article p,
+html[lang="zh-CN"] #about p {
+  @apply indent-8;
 }

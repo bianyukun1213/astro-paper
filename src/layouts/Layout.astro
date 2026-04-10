@@ -4,7 +4,7 @@ import { ClientRouter } from "astro:transitions";
 import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
 import { SITE } from "@/config";
 import "@/styles/global.css";
-import { getLocalizedUrl, type Locale } from "@/utils/locale";
+import { getLocaleDir, getLocalizedUrl, type Locale } from "@/utils/locale";
 
 type Props = {
   title?: string;
@@ -30,7 +30,24 @@ const {
   scrollSmooth = false,
 } = Astro.props;
 
+const localeFonts = {
+  default: {
+    cssVariable: "--font-google-sans-code",
+    preload: [{ subset: "latin", weight: 400, style: "normal" }],
+  },
+  "en-US": {
+    cssVariable: "--font-noto-sans",
+    preload: false
+  },
+  "zh-CN": {
+    cssVariable: "--font-noto-sans-sc",
+    preload: false
+  },
+} as const;
+
 const currentLocale = Astro.currentLocale as Locale;
+const localeFont =
+  localeFonts[currentLocale as keyof typeof localeFonts] ?? localeFonts.default;
 
 const socialImageURL = new URL(ogImage, Astro.url);
 
@@ -53,8 +70,8 @@ const structuredData = {
 
 <!doctype html>
 <html
-  dir={SITE.dir}
-  lang=`${SITE.lang ?? "en"}`
+  dir={getLocaleDir(currentLocale)}
+  lang={currentLocale}
   class={`${scrollSmooth && "scroll-smooth"}`}
 >
   <head>
@@ -66,8 +83,10 @@ const structuredData = {
 
     <!-- Load Font -->
     <Font
-      cssVariable="--font-google-sans-code"
-      preload={[{ subset: "latin", weight: 400, style: "normal" }]}
+      cssVariable={localeFont.cssVariable}
+      preload={Array.isArray(localeFont.preload)
+        ? [...localeFont.preload]
+        : false}
     />
 
     <!-- General Meta Tags -->

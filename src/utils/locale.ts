@@ -1,7 +1,7 @@
 import { DEFAULT_LOCALE } from "@/../astro.config";
 import { BLOG_PATH } from "@/content.config";
 import * as messages from "@/paraglide/messages";
-import type { Locale } from "@/paraglide/runtime";
+import { getTextDirection, type Locale } from "@/paraglide/runtime";
 import {
   getRelativeLocaleUrl as getRelativeLocaleUrlImpl,
   getRelativeLocaleUrlList,
@@ -26,6 +26,15 @@ export function getLocales() {
     const locale = url.split("/")[1];
     return locale;
   });
+}
+
+/**
+ * Returns the text direction for a given locale.
+ * @param locale The locale to get the text direction for.
+ * @returns The text direction ("ltr" or "rtl").
+ */
+export function getLocaleDir(locale: Locale) {
+  return getTextDirection(locale);
 }
 
 /**

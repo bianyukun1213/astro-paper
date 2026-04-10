@@ -44,7 +44,11 @@ export default defineConfig({
     // This will be fixed in Astro 6 with Vite 7 support
     // See: https://github.com/withastro/astro/issues/14030
     plugins: [
+      // eslint-disable-next-line
+      // @ts-ignore
       tailwindcss(),
+      // eslint-disable-next-line
+      // @ts-ignore
       paraglideVitePlugin({
         project: "./project.inlang",
         outdir: "./src/paraglide",
@@ -84,6 +88,24 @@ export default defineConfig({
       fallbacks: ["monospace"],
       weights: [300, 400, 500, 600, 700],
       styles: ["normal", "italic"],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: "Noto Sans",
+      cssVariable: "--font-noto-sans",
+      fallbacks: ["sans-serif"],
+      weights: [300, 400, 500, 600, 700],
+      styles: ["normal", "italic"],
+      subsets: ["latin", "cyrillic"],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: "Noto Sans SC",
+      cssVariable: "--font-noto-sans-sc",
+      fallbacks: ["sans-serif"],
+      weights: [300, 400, 500, 600, 700],
+      styles: ["normal", "italic"],
+      subsets: ["latin", "chinese-simplified"],
     },
   ],
 });
