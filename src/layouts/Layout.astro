@@ -4,7 +4,12 @@ import { ClientRouter } from "astro:transitions";
 import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
 import { SITE } from "@/config";
 import "@/styles/global.css";
-import { getLocaleDir, getLocalizedUrl, useTranslations, type Locale } from "@/utils/locale";
+import {
+  getLocaleDir,
+  getLocalizedUrl,
+  useTranslations,
+  type Locale,
+} from "@/utils/locale";
 
 type Props = {
   title?: string;
@@ -44,6 +49,10 @@ const localeFonts = {
   },
   "zh-CN": {
     cssVariable: "--font-noto-sans-sc",
+    preload: false,
+  },
+  "ru-RU": {
+    cssVariable: "--font-noto-sans",
     preload: false,
   },
 } as const;

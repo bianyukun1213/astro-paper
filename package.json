@@ -3,7 +3,7 @@
   "type": "module",
   "version": "5.5.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "paraglide-js compile --project ./project.inlang --outdir ./src\\paraglide --emit-ts-declarations && astro dev",
     "build": "paraglide-js compile --project ./project.inlang --outdir ./src\\paraglide --emit-ts-declarations && astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/",
     "preview": "astro preview",
     "sync": "astro sync",
@@ -11,7 +11,7 @@
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "machine-translate": "inlang machine translate --project project.inlang",
+    "machine-translate": "inlang machine translate --project project.inlang --locale en-US --targetLocales zh-CN,ru-RU",
     "compile-messages": "paraglide-js compile --project ./project.inlang --outdir ./src\\paraglide --emit-ts-declarations"
   },
   "dependencies": {

@@ -20,27 +20,27 @@ export function getLocalizedSocials(locale: Locale): Social[] {
   const t = useTranslations(locale);
   return [
     {
-      name: t.social_name_github(),
+      name: t.term_github(),
       href: "https://github.com/satnaing/astro-paper",
-      linkTitle: t.social_on_github({ title: t.site_title() }),
+      linkTitle: t.btn_social_title_github(),
       icon: IconGitHub,
     },
     {
-      name: t.social_name_x(),
+      name: t.term_x(),
       href: "https://x.com/username",
-      linkTitle: t.social_on_x({ title: t.site_title() }),
+      linkTitle: t.btn_social_title_x(),
       icon: IconBrandX,
     },
     {
-      name: t.social_name_linkedin(),
+      name: t.term_linkedin(),
       href: "https://www.linkedin.com/in/username/",
-      linkTitle: t.social_on_linkedin({ title: t.site_title() }),
+      linkTitle: t.btn_social_title_linkedin(),
       icon: IconLinkedin,
     },
     {
-      name: t.social_name_mail(),
+      name: t.term_mail(),
       href: "mailto:yourmail@gmail.com",
-      linkTitle: t.social_send_email({ title: t.site_title() }),
+      linkTitle: t.btn_social_title_mail(),
       icon: IconMail,
     },
   ];
@@ -50,39 +50,39 @@ export function getLocalizedShareLinks(locale: Locale): Social[] {
   const t = useTranslations(locale);
   return [
     {
-      name: t.share_name_whatsapp(),
+      name: t.term_whatsapp(),
       href: "https://wa.me/?text=",
-      linkTitle: t.share_via_whatsapp(),
+      linkTitle: t.btn_share_title_whatsapp(),
       icon: IconWhatsapp,
     },
     {
-      name: t.share_name_facebook(),
+      name: t.term_facebook(),
       href: "https://www.facebook.com/sharer.php?u=",
-      linkTitle: t.share_on_facebook(),
+      linkTitle: t.btn_share_title_facebook(),
       icon: IconFacebook,
     },
     {
-      name: t.share_name_x(),
+      name: t.term_x(),
       href: "https://x.com/intent/post?url=",
-      linkTitle: t.share_on_x(),
+      linkTitle: t.btn_share_title_x(),
       icon: IconBrandX,
     },
     {
-      name: t.share_name_telegram(),
+      name: t.term_telegram(),
       href: "https://t.me/share/url?url=",
-      linkTitle: t.share_via_telegram(),
+      linkTitle: t.btn_share_title_telegram(),
       icon: IconTelegram,
     },
     {
-      name: t.share_name_pinterest(),
+      name: t.term_pinterest(),
       href: "https://pinterest.com/pin/create/button/?url=",
-      linkTitle: t.share_on_pinterest(),
+      linkTitle: t.btn_share_title_pinterest(),
       icon: IconPinterest,
     },
     {
-      name: t.share_name_mail(),
+      name: t.term_mail(),
       href: "mailto:?subject=See%20this%20post&body=",
-      linkTitle: t.share_via_email(),
+      linkTitle: t.btn_share_title_mail(),
       icon: IconMail,
     },
   ];
