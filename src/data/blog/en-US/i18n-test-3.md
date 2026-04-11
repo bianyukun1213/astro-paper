@@ -7,7 +7,7 @@ featured: false
 draft: true
 tags:
   - i18n
-  - en
+  - EN
 description: This is a test.
 ---
 

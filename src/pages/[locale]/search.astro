@@ -27,9 +27,9 @@ const backUrl = SITE.showBackButton
   : getLocalizedUrl(currentLocale, "/");
 ---
 
-<Layout title={`Search | ${m.site_title()}`}>
+<Layout title={`${m.text_search()} | ${m.site_title()}`}>
   <Header />
-  <Main pageTitle="Search" pageDesc="Search any article ...">
+  <Main pageTitle={m.text_search()} pageDesc={m.text_search_desc()}>
     <div id="pagefind-search" transition:persist data-backurl={backUrl}></div>
   </Main>
   <Footer />

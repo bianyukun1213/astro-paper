@@ -9,7 +9,11 @@ import Main from "@/layouts/Main.astro";
 import { getPostsByLocale } from "@/utils/getPostsByLocale";
 import getPostsByTag from "@/utils/getPostsByTag";
 import getUniqueTags from "@/utils/getUniqueTags";
-import { getLocaleFromFilePath, useTranslations, type Locale } from "@/utils/locale";
+import {
+getLocaleFromFilePath,
+useTranslations,
+type Locale,
+} from "@/utils/locale";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 
@@ -38,14 +42,13 @@ const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
 ---
 
-<Layout title={`Tag: ${tagName} | ${m.site_title()}`}>
+<Layout title={`${m.text_tags_tag({ tagName })} | ${m.site_title()}`}>
   <Header />
   <Main
-    pageTitle={[`Tag:`, `${tagName}`]}
-    titleTransition={tag}
-    pageDesc={`All the articles with the tag "${tagName}".`}
+    pageTitle={m.text_tags_tag({ tagName })}
+    pageDesc={m.text_tags_tag_desc({ tagName })}
   >
-    <h1 slot="title" transition:name={tag}>{`Tag:${tag}`}</h1>
+    <h1 slot="title">{m.text_tags_tag({ tagName })}</h1>
     <ul>
       {page.data.map(data => <Card {...data} />)}
     </ul>

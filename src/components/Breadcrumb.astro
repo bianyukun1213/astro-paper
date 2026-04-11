@@ -1,5 +1,8 @@
 ---
+import { getPostsByLocale } from "@/utils/getPostsByLocale";
+import getUniqueTags from "@/utils/getUniqueTags";
 import { getLocalizedUrl, useTranslations, type Locale } from "@/utils/locale";
+import { getCollection } from "astro:content";
 
 const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
@@ -17,28 +20,43 @@ const breadcrumbLocalizedList = [...breadcrumbPathList];
 // replace Posts with Posts (page number)
 if (breadcrumbPathList[0] === "posts") {
   breadcrumbLocalizedList[0] = m.text_posts();
+  const page = Number(breadcrumbLocalizedList[1]) || 1;
   breadcrumbLocalizedList.splice(
     0,
     2,
-    m.text_posts_page({ page: breadcrumbLocalizedList[1] || 1 })
+    page === 1 ? m.text_posts() : m.text_posts_page({ page })
   );
   breadcrumbPathList.splice(0, 2, "posts");
 }
 
 // if breadcrumb is Home > Tags > [tag] > [page] <etc>
 // replace [tag] > [page] with [tag] (page number)
+let tagName = "";
 if (breadcrumbPathList[0] === "tags") {
   breadcrumbLocalizedList[0] = m.text_tags();
-  if (!isNaN(Number(breadcrumbPathList[2]))) {
-    const page = Number(breadcrumbPathList[2]);
-    const tag = breadcrumbPathList[1];
-    breadcrumbLocalizedList.splice(
-      1,
-      3,
-      page === 1 ? tag : m.text_tags_page({ tag, page })
-    );
-    breadcrumbPathList.splice(1, 3, tag);
+  const allPosts = await getCollection("blog");
+  const posts = getPostsByLocale(allPosts, currentLocale);
+  const tags = getUniqueTags(posts);
+  const tagFromUrl = breadcrumbPathList[1]
+    ? decodeURIComponent(breadcrumbPathList[1])
+    : "";
+  if (tagFromUrl) {
+    tagName = tags.filter(t => t.tag === tagFromUrl)[0]?.tagName || tagFromUrl;
   }
+  const page = Number(breadcrumbLocalizedList[2]);
+  if (!isNaN(page)) {
+    tagName = page === 1 ? tagName : m.text_tags_page({ tagName, page });
+    breadcrumbLocalizedList.splice(1, 3, tagName);
+    breadcrumbPathList.splice(1, 3, tagFromUrl);
+  }
+}
+
+if (breadcrumbLocalizedList[0] === "archives") {
+  breadcrumbLocalizedList[0] = m.text_archives();
+}
+
+if (breadcrumbLocalizedList[0] === "search") {
+  breadcrumbLocalizedList[0] = m.text_search();
 }
 
 if (breadcrumbLocalizedList[0] === "about") {
@@ -60,12 +78,8 @@ if (breadcrumbLocalizedList[0] === "about") {
       breadcrumbLocalizedList.map((breadcrumb, index) =>
         index + 1 === breadcrumbLocalizedList.length ? (
           <li>
-            <span
-              class:list={["capitalize opacity-75", { lowercase: index > 0 }]}
-              aria-current="page"
-            >
-              {/* make the last part lowercase in Home > Tags > some-tag */}
-              {decodeURIComponent(breadcrumb)}
+            <span class:list={"opacity-75"} aria-current="page">
+              {tagName || decodeURIComponent(breadcrumb)}
             </span>
           </li>
         ) : (

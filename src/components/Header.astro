@@ -14,15 +14,13 @@ const m = useTranslations(currentLocale);
 
 const { pathname } = Astro.url;
 
-// Remove trailing slash from current pathname if exists
-const currentPath =
-  pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+const currentPath = pathname;
 
 const isActive = (path: string) => {
   const currentPathArray = currentPath.split("/").filter(p => p.trim());
   const pathArray = path.split("/").filter(p => p.trim());
 
-  return currentPath === path || currentPathArray[0] === pathArray[0];
+  return currentPath === path || currentPathArray[1] === pathArray[1];
 };
 ---
 
@@ -78,7 +76,9 @@ const isActive = (path: string) => {
         <li class="col-span-2">
           <a
             href={getLocalizedUrl(currentLocale, "/posts/")}
-            class:list={{ "active-nav": isActive("/posts") }}
+            class:list={{
+              "active-nav": isActive(getLocalizedUrl(currentLocale, "/posts/")),
+            }}
           >
             {m.btn_posts_title()}
           </a>
@@ -86,7 +86,9 @@ const isActive = (path: string) => {
         <li class="col-span-2">
           <a
             href={getLocalizedUrl(currentLocale, "/tags/")}
-            class:list={{ "active-nav": isActive("/tags") }}
+            class:list={{
+              "active-nav": isActive(getLocalizedUrl(currentLocale, "/tags/")),
+            }}
           >
             {m.btn_tags_title()}
           </a>
@@ -94,7 +96,9 @@ const isActive = (path: string) => {
         <li class="col-span-2">
           <a
             href={getLocalizedUrl(currentLocale, "/about/")}
-            class:list={{ "active-nav": isActive("/about") }}
+            class:list={{
+              "active-nav": isActive(getLocalizedUrl(currentLocale, "/about/")),
+            }}
           >
             {m.btn_about_title()}
           </a>
@@ -107,7 +111,9 @@ const isActive = (path: string) => {
                 class:list={[
                   "focus-outline flex justify-center p-3 sm:p-1",
                   {
-                    "active-nav [&>svg]:stroke-accent": isActive("/archives"),
+                    "active-nav [&>svg]:stroke-accent": isActive(
+                      getLocalizedUrl(currentLocale, "/archives/")
+                    ),
                   },
                 ]}
                 title={m.btn_archives_title()}
@@ -124,7 +130,11 @@ const isActive = (path: string) => {
             href={getLocalizedUrl(currentLocale, "/search/")}
             class:list={[
               "focus-outline flex p-3 sm:p-1",
-              { "[&>svg]:stroke-accent": isActive("/search") },
+              {
+                "[&>svg]:stroke-accent": isActive(
+                  getLocalizedUrl(currentLocale, "/search/")
+                ),
+              },
             ]}
             title={m.btn_search_title()}
             aria-label={m.btn_search_title()}

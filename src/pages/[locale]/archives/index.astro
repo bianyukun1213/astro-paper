@@ -29,24 +29,24 @@ const allPosts = await getCollection("blog", ({ data }) => !data.draft);
 const posts = getPostsByLocale(allPosts, currentLocale);
 
 const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  m.month_1(),
+  m.month_2(),
+  m.month_3(),
+  m.month_4(),
+  m.month_5(),
+  m.month_6(),
+  m.month_7(),
+  m.month_8(),
+  m.month_9(),
+  m.month_10(),
+  m.month_11(),
+  m.month_12(),
 ];
 ---
 
-<Layout title={`Archives | ${m.site_title()}`}>
+<Layout title={`${m.text_archives()} | ${m.site_title()}`}>
   <Header />
-  <Main pageTitle="Archives" pageDesc="All the articles I've archived.">
+  <Main pageTitle={m.text_archives()} pageDesc={m.text_archives_desc()}>
     {
       Object.entries(
         getPostsByGroupCondition(posts, post =>
