@@ -1,37 +1,37 @@
 ---
 layout: /src/layouts/AboutLayout.astro
-title: О
+title: "О проекте"
 ---
 
-AstroPaper is a minimal, accessible and SEO-friendly blog theme built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+AstroPaper — это минималистичная, доступная и SEO-дружелюбная тема блога, созданная на [Astro](https://astro.build/) и [Tailwind CSS](https://tailwindcss.com/).
 
 ![Astro Paper](public/astropaper-og.jpg)
 
-AstroPaper provides a solid foundation for blogs, or even portfolios\_ with full markdown support, built-in dark mode, and a clean layout that works out-of-the-box.
+AstroPaper дает надежную основу для блогов и даже портфолио: полная поддержка Markdown, встроенная темная тема и чистый макет, готовый к использованию сразу после установки.
 
-The blog posts in this theme also serve as guides, docs or example articles\_ making AstroPaper a flexible starting point for your next content-driven site.
+Посты в этой теме также могут служить руководствами, документацией или примерами статей, что делает AstroPaper гибкой отправной точкой для вашего следующего контентного сайта.
 
-## Features
+## Возможности
 
-AstroPaper comes with a set of useful features that make content publishing easy and effective:
+AstroPaper включает набор полезных возможностей, которые делают публикацию контента простой и эффективной:
 
-- SEO-friendly
-- Fast performance
-- Light & dark mode
-- Highly customizable
-- Organizable blog posts
-- Responsive & accessible
-- Static search with [PageFind](https://pagefind.app/)
-- Automatic social image generation
+- SEO-дружелюбность
+- Высокая производительность
+- Светлая и темная темы
+- Гибкая настройка
+- Удобная организация постов
+- Адаптивность и доступность
+- Статический поиск с [PageFind](https://pagefind.app/)
+- Автоматическая генерация изображений для соцсетей
 
-and so much more.
+и многое другое.
 
-## Show your support
+## Поддержите проект
 
-If you like [AstroPaper](https://github.com/satnaing/astro-paper), consider giving it a star ⭐️.
+Если вам нравится [AstroPaper](https://github.com/satnaing/astro-paper), поставьте проекту звезду ⭐️.
 
-Found a bug 🐛 or have an improvement ✨ in mind? Feel free to open an [issue](https://github.com/satnaing/astro-paper/issues), submit a [pull request](https://github.com/satnaing/astro-paper/pulls) or start a [discussion](https://github.com/satnaing/astro-paper/discussions).
+Нашли ошибку 🐛 или есть идея улучшения ✨? Смело открывайте [issue](https://github.com/satnaing/astro-paper/issues), отправляйте [pull request](https://github.com/satnaing/astro-paper/pulls) или начинайте [discussion](https://github.com/satnaing/astro-paper/discussions).
 
-If you find this theme helpful, you can also [sponsor me on GitHub](https://github.com/sponsors/satnaing) or [buy me a coffee](https://buymeacoffee.com/satnaing) to show your support — every penny counts.
+Если эта тема оказалась вам полезной, вы также можете [поддержать меня на GitHub](https://github.com/sponsors/satnaing) или [угостить кофе](https://buymeacoffee.com/satnaing) — важна каждая поддержка.
 
-Kyay zuu! 🙏🏼
+Спасибо! 🙏🏼
