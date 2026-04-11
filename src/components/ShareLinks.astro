@@ -1,9 +1,10 @@
 ---
 import { getLocalizedShareLinks } from "@/socials";
-import type { Locale } from "@/utils/locale";
+import { useTranslations, type Locale } from "@/utils/locale";
 import LinkButton from "./LinkButton.astro";
 
 const currentLocale = Astro.currentLocale as Locale;
+const m = useTranslations(currentLocale);
 const SHARE_LINKS = getLocalizedShareLinks(currentLocale);
 
 const URL = Astro.url;
@@ -12,7 +13,7 @@ const URL = Astro.url;
 {
   SHARE_LINKS.length > 0 && (
     <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start">
-      <span class="italic">Share this post on:</span>
+      <span class="italic">{m.text_share_post()}</span>
       <div class="text-center">
         {SHARE_LINKS.map(social => (
           <LinkButton

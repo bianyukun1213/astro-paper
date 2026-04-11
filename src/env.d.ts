@@ -6,4 +6,6 @@ interface Window {
     getTheme: () => string;
     setTheme: (val: string) => void;
   };
+  m: import("@/paraglide/messages.js").m;
+  setLocale: import("@/paraglide/runtime").SetLocaleFn;
 }

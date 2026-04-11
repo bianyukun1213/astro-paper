@@ -77,7 +77,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
   document.addEventListener("astro:page-load", () => {
     const indexLayout = (document.querySelector("#main-content") as HTMLElement)
       ?.dataset?.layout;
-    const locale = window.location.pathname.split("/")[1];
+    const locale = document.documentElement.lang;
     if (indexLayout) {
       sessionStorage.setItem("backUrl", locale ? `/${locale}/` : "/");
     }

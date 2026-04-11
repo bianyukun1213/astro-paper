@@ -25,9 +25,9 @@ const posts = getPostsByLocale(allPosts, currentLocale);
 let tags = getUniqueTags(posts);
 ---
 
-<Layout title={`Tags | ${m.site_title()}`}>
+<Layout title={`${m.text_tags()} | ${m.site_title()}`}>
   <Header />
-  <Main pageTitle="Tags" pageDesc="All the tags used in posts.">
+  <Main pageTitle={m.text_tags()} pageDesc={m.text_tags_desc()}>
     <ul class="flex flex-wrap gap-6">
       {tags.map(({ tag, tagName }) => <Tag {tag} {tagName} />)}
     </ul>

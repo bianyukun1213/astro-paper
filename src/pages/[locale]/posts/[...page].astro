@@ -8,7 +8,11 @@ import Layout from "@/layouts/Layout.astro";
 import Main from "@/layouts/Main.astro";
 import { getPostsByLocale } from "@/utils/getPostsByLocale";
 import getSortedPosts from "@/utils/getSortedPosts";
-import { getLocaleFromFilePath, useTranslations, type Locale } from "@/utils/locale";
+import {
+getLocaleFromFilePath,
+useTranslations,
+type Locale,
+} from "@/utils/locale";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 
@@ -32,9 +36,9 @@ const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
 ---
 
-<Layout title={`Posts | ${m.site_title()}`}>
+<Layout title={`${m.text_posts()} | ${m.site_title()}`}>
   <Header />
-  <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
+  <Main pageTitle={m.text_posts()} pageDesc={m.text_posts_desc()}>
     <ul>
       {page.data.map(data => <Card {...data} />)}
     </ul>

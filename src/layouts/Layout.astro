@@ -158,6 +158,7 @@ const structuredData = {
     />
 
     <meta name="theme-color" content="" />
+    <meta name="transitions" content="" />
 
     {
       // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
@@ -204,6 +205,14 @@ const structuredData = {
     </script>
   </head>
   <body>
+    <script>
+      import { m } from "@/paraglide/messages.js";
+import { setLocale, type Locale } from "@/paraglide/runtime";
+      window.m = m;
+      window.setLocale = setLocale;
+      window.setLocale(document.documentElement.lang as Locale);
+    </script>
+
     <slot />
 
     <!-- Load full theme logic -->

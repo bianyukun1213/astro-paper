@@ -32,7 +32,19 @@ function setPreference(): void {
 function reflectPreference(): void {
   document.firstElementChild?.setAttribute("data-theme", themeValue);
 
-  document.querySelector("#theme-btn")?.setAttribute("aria-label", themeValue);
+  let ariaLabel = "";
+  switch (themeValue) {
+    case "light":
+      ariaLabel = window.m.btn_toggle_light_dark_title_light();
+      break;
+    case "dark":
+      ariaLabel = window.m.btn_toggle_light_dark_title_dark();
+      break;
+    default:
+      ariaLabel = window.m.btn_toggle_light_dark_title_auto();
+      break;
+  }
+  document.querySelector("#theme-btn")?.setAttribute("aria-label", ariaLabel);
 
   // Get a reference to the body element
   const body = document.body;

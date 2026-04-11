@@ -7,7 +7,7 @@ featured: false
 draft: true
 tags:
   - i18n
-  - zh
+  - 中文
 description: This is a test.
 ---
 

@@ -1,8 +1,9 @@
 ---
-import type { Page } from "astro";
-import type { CollectionEntry } from "astro:content";
 import IconArrowLeft from "@/assets/icons/IconArrowLeft.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import { useTranslations, type Locale } from "@/utils/locale";
+import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
 import LinkButton from "./LinkButton.astro";
 
 type Props = {
@@ -10,6 +11,9 @@ type Props = {
 };
 
 const { page } = Astro.props;
+
+const currentLocale = Astro.currentLocale as Locale;
+const m = useTranslations(currentLocale);
 ---
 
 {
@@ -17,25 +21,25 @@ const { page } = Astro.props;
     <nav
       class="mt-auto mb-8 flex justify-center"
       role="navigation"
-      aria-label="Pagination Navigation"
+      aria-label={m.text_pagination()}
     >
       <LinkButton
         disabled={!page.url.prev}
         href={page.url.prev as string}
         class:list={["me-4 select-none", { "opacity-50": !page.url.prev }]}
-        aria-label="Goto Previous Page"
+        aria-label={m.btn_previous_page_title()}
       >
         <IconArrowLeft class="inline-block rtl:rotate-180" />
-        Prev
+        {m.btn_previous_page_title()}
       </LinkButton>
       {page.currentPage} / {page.lastPage}
       <LinkButton
         disabled={!page.url.next}
         href={page.url.next as string}
         class:list={["ms-4 select-none", { "opacity-50": !page.url.next }]}
-        aria-label="Goto Next Page"
+        aria-label={m.btn_next_page_title()}
       >
-        Next
+        {m.btn_next_page_title()}
         <IconArrowRight class="inline-block rtl:rotate-180" />
       </LinkButton>
     </nav>
