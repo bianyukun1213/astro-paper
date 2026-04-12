@@ -24,7 +24,7 @@ if (breadcrumbPathList[0] === "posts") {
   breadcrumbLocalizedList.splice(
     0,
     2,
-    page === 1 ? m.text_posts() : m.text_posts_page({ page })
+    page === 1 ? m.text_posts() : m.text_posts_pagination({ page })
   );
   breadcrumbPathList.splice(0, 2, "posts");
 }
@@ -45,7 +45,7 @@ if (breadcrumbPathList[0] === "tags") {
   }
   const page = Number(breadcrumbLocalizedList[2]);
   if (!isNaN(page)) {
-    tagName = page === 1 ? tagName : m.text_tags_page({ tagName, page });
+    tagName = page === 1 ? tagName : m.text_tags_pagination({ tagName, page });
     breadcrumbLocalizedList.splice(1, 3, tagName);
     breadcrumbPathList.splice(1, 3, tagFromUrl);
   }

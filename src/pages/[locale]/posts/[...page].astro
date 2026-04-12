@@ -29,11 +29,10 @@ export const getStaticPaths = (async ({ paginate }) => {
     });
   });
 }) satisfies GetStaticPaths;
-
-// const currentLocale = Astro.currentLocale as Locale;
-const { page } = Astro.props;
 const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
+
+const { page } = Astro.props;
 ---
 
 <Layout title={`${m.text_posts()} | ${m.site_title()}`}>

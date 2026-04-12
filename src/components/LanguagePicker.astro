@@ -9,20 +9,18 @@ const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
 
 type Props = {
+  id?: string;
   class?: string;
-  availableLocales?: Locale[];
+  localesOverride?: Locale[];
 };
-const { class: className, availableLocales } = Astro.props;
-const displayLocales = availableLocales ?? locales;
-
-const pathname = Astro.url.pathname;
-const basePath = pathname.slice(`/${currentLocale}`.length) || "/";
+const { id, class: className, localesOverride } = Astro.props;
+const displayLocales = localesOverride ?? locales;
 ---
 
 <select
+  id={id}
   name="language"
-  id="language-picker"
-  class={className}
+  class:list={["cursor-pointer", className]}
   aria-label={m.text_select_language()}
 >
   {
@@ -37,18 +35,3 @@ const basePath = pathname.slice(`/${currentLocale}`.length) || "/";
     })
   }
 </select>
-
-<!-- <ul>
-  {
-    displayLocales.map(locale => (
-      <li>
-        <a
-          href={getLocalizedUrl(locale as Locale, basePath)}
-          aria-current={locale === currentLocale ? "page" : undefined}
-        >
-          {locale}
-        </a>
-      </li>
-    ))
-  }
-</ul> -->

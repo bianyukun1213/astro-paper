@@ -14,8 +14,9 @@ const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
 
 const { pathname } = Astro.url;
-
 const currentPath = pathname;
+
+const { localesOverride } = Astro.locals;
 
 const isActive = (path: string) => {
   const currentPathArray = currentPath.split("/").filter(p => p.trim());
@@ -105,8 +106,12 @@ const isActive = (path: string) => {
             {m.btn_about_title()}
           </a>
         </li>
-        <li class="col-span-2 flex items-center justify-center">
-          <LanguagePicker class="focus-outline" />
+        <li class="col-span-2">
+          <LanguagePicker
+            id="language-picker"
+            class="focus-outline mx-auto"
+            localesOverride={localesOverride}
+          />
         </li>
         {
           SITE.showArchives && (
@@ -175,8 +180,10 @@ const isActive = (path: string) => {
     const menuItems = document.querySelector("#menu-items");
     const menuIcon = document.querySelector("#menu-icon");
     const closeIcon = document.querySelector("#close-icon");
+    const languagePicker = document.querySelector("#language-picker");
 
-    if (!menuBtn || !menuItems || !menuIcon || !closeIcon) return;
+    if (!menuBtn || !menuItems || !menuIcon || !closeIcon || !languagePicker)
+      return;
 
     menuBtn.addEventListener("click", () => {
       const openMenu = menuBtn.getAttribute("aria-expanded") === "true";
@@ -192,6 +199,20 @@ const isActive = (path: string) => {
       menuItems.classList.toggle("hidden");
       menuIcon.classList.toggle("hidden");
       closeIcon.classList.toggle("hidden");
+    });
+
+    languagePicker.addEventListener("change", event => {
+      const locale = document.documentElement.lang;
+      const targetLocale = (event.target as HTMLSelectElement).value;
+      let backUrl = sessionStorage.getItem("backUrl");
+      if (backUrl) {
+        backUrl = backUrl.replace(`/${locale}/`, `/${targetLocale}/`);
+        sessionStorage.setItem("backUrl", backUrl);
+      }
+      window.location.href = window.location.href.replace(
+        `/${locale}/`,
+        `/${targetLocale}/`
+      );
     });
   }
 

@@ -35,11 +35,12 @@ export const getStaticPaths = (async ({ paginate }) => {
     });
   });
 }) satisfies GetStaticPaths;
-
-const { tag } = Astro.params;
-const { page, tagName } = Astro.props;
 const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
+
+const { page, tagName } = Astro.props;
+
+Astro.locals.localesOverride = [currentLocale];
 ---
 
 <Layout title={`${m.text_tags_tag({ tagName })} | ${m.site_title()}`}>

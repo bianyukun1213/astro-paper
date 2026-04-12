@@ -9,3 +9,9 @@ interface Window {
   m: import("@/paraglide/messages.js").m;
   setLocale: import("@/paraglide/runtime").SetLocaleFn;
 }
+
+declare namespace App {
+  interface Locals {
+    localesOverride?: import("@/paraglide/runtime").Locale[];
+  }
+}

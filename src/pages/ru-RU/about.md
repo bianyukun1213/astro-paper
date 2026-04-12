@@ -1,6 +1,6 @@
 ---
 layout: /src/layouts/AboutLayout.astro
-title: "О проекте"
+title: "О сайте"
 ---
 
 AstroPaper — это минималистичная, доступная и SEO-дружелюбная тема блога, созданная на [Astro](https://astro.build/) и [Tailwind CSS](https://tailwindcss.com/).
