@@ -24,7 +24,7 @@ export function getLocales() {
   });
   return paths.map(url => {
     const locale = url.split("/")[1];
-    return locale;
+    return locale as Locale;
   });
 }
 
@@ -60,7 +60,7 @@ export function getLocaleFromFilePath(filePath: string | undefined): Locale {
   }
   const relative = filePath.replace(BLOG_PATH + "/", "");
   const firstSegment = relative.split("/")[0];
-  if (getLocales().includes(firstSegment)) {
+  if (getLocales().includes(firstSegment as Locale)) {
     return firstSegment as Locale;
   }
   return DEFAULT_LOCALE;

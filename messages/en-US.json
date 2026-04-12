@@ -1,5 +1,8 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "lang_en_us": "English",
+  "lang_zh_cn": "简体中文",
+  "lang_ru_ru": "Русский",
   "month_1": "January",
   "month_2": "February",
   "month_3": "March",
@@ -43,6 +46,7 @@
   "btn_skip_to_content_title": "Skip to content",
   "btn_open_menu_title": "Open menu",
   "btn_close_menu_title": "Close menu",
+  "text_select_language": "Select language",
   "btn_posts_title": "Posts",
   "btn_tags_title": "Tags",
   "btn_about_title": "About",
