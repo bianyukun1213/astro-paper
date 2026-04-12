@@ -22,6 +22,8 @@
   "text_featured_posts": "Featured posts",
   "text_recent_posts": "Recent posts",
   "btn_all_posts_title": "All posts",
+  "btn_previous_post_title": "Previous",
+  "btn_next_post_title": "Next",
   "btn_go_back_title": "Go back",
   "btn_back_to_top_title": "Back to top",
   "text_breadcrumb": "Breadcrumb",
