@@ -79,5 +79,8 @@
   "btn_share_title_x": "Поделиться этой статьей на X",
   "btn_share_title_telegram": "Поделиться этой статьей через Telegram",
   "btn_share_title_pinterest": "Поделиться этой статьей на Pinterest",
-  "btn_share_title_mail": "Поделиться этой статьей по электронной почте"
+  "btn_share_title_mail": "Поделиться этой статьей по электронной почте",
+  "tag_en": "English",
+  "tag_zh": "中文",
+  "tag_i18n": "I18n"
 }

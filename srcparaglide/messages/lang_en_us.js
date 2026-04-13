@@ -9,11 +9,13 @@ const en_us2_lang_en_us = /** @type {(inputs: Lang_En_UsInputs) => LocalizedStri
 	return /** @type {LocalizedString} */ (`English`)
 };
 
-/** @type {(inputs: Lang_En_UsInputs) => LocalizedString} */
-const zh_cn2_lang_en_us = en_us2_lang_en_us;
+const zh_cn2_lang_en_us = /** @type {(inputs: Lang_En_UsInputs) => LocalizedString} */ () => {
+	return /** @type {LocalizedString} */ (`English`)
+};
 
-/** @type {(inputs: Lang_En_UsInputs) => LocalizedString} */
-const ru_ru2_lang_en_us = en_us2_lang_en_us;
+const ru_ru2_lang_en_us = /** @type {(inputs: Lang_En_UsInputs) => LocalizedString} */ () => {
+	return /** @type {LocalizedString} */ (`English`)
+};
 
 /**
 * | output |

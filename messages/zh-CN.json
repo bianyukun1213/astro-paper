@@ -79,5 +79,8 @@
   "btn_share_title_x": "在 X 上分享此文章",
   "btn_share_title_telegram": "通过 Telegram 分享此文章",
   "btn_share_title_pinterest": "在 Pinterest 上分享此文章",
-  "btn_share_title_mail": "通过邮件分享此文章"
+  "btn_share_title_mail": "通过邮件分享此文章",
+  "tag_en": "English",
+  "tag_zh": "中文",
+  "tag_i18n": "I18n"
 }

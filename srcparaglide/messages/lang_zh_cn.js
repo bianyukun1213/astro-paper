@@ -9,11 +9,13 @@ const en_us2_lang_zh_cn = /** @type {(inputs: Lang_Zh_CnInputs) => LocalizedStri
 	return /** @type {LocalizedString} */ (`简体中文`)
 };
 
-/** @type {(inputs: Lang_Zh_CnInputs) => LocalizedString} */
-const zh_cn2_lang_zh_cn = en_us2_lang_zh_cn;
+const zh_cn2_lang_zh_cn = /** @type {(inputs: Lang_Zh_CnInputs) => LocalizedString} */ () => {
+	return /** @type {LocalizedString} */ (`简体中文`)
+};
 
-/** @type {(inputs: Lang_Zh_CnInputs) => LocalizedString} */
-const ru_ru2_lang_zh_cn = en_us2_lang_zh_cn;
+const ru_ru2_lang_zh_cn = /** @type {(inputs: Lang_Zh_CnInputs) => LocalizedString} */ () => {
+	return /** @type {LocalizedString} */ (`简体中文`)
+};
 
 /**
 * | output |

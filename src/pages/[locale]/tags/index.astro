@@ -22,7 +22,7 @@ const m = useTranslations(currentLocale);
 const allPosts = await getCollection("blog");
 const posts = getPostsByLocale(allPosts, currentLocale);
 
-let tags = getUniqueTags(posts);
+let tags = getUniqueTags(posts, currentLocale);
 ---
 
 <Layout title={`${m.text_tags()} | ${m.site_title()}`}>

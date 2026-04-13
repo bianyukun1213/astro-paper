@@ -79,5 +79,8 @@
   "btn_share_title_x": "Share this post on X",
   "btn_share_title_telegram": "Share this post via Telegram",
   "btn_share_title_pinterest": "Share this post on Pinterest",
-  "btn_share_title_mail": "Share this post via email"
+  "btn_share_title_mail": "Share this post via email",
+  "tag_en": "English",
+  "tag_zh": "中文",
+  "tag_i18n": "I18n"
 }

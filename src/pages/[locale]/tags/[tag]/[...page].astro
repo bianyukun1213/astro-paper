@@ -11,6 +11,7 @@ import getPostsByTag from "@/utils/getPostsByTag";
 import getUniqueTags from "@/utils/getUniqueTags";
 import {
 getLocaleFromFilePath,
+getLocales,
 useTranslations,
 type Locale,
 } from "@/utils/locale";
@@ -24,7 +25,7 @@ export const getStaticPaths = (async ({ paginate }) => {
   ];
   return localesInUse.flatMap(locale => {
     const localePosts = getPostsByLocale(allPosts, locale);
-    const tags = getUniqueTags(localePosts);
+    const tags = getUniqueTags(localePosts, locale);
     return tags.flatMap(({ tag, tagName }) => {
       const tagPosts = getPostsByTag(localePosts, tag);
       return paginate(tagPosts, {
@@ -38,9 +39,21 @@ export const getStaticPaths = (async ({ paginate }) => {
 const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
 
+const { tag } = Astro.params;
 const { page, tagName } = Astro.props;
 
-Astro.locals.localesOverride = [currentLocale];
+const availableLocales: Locale[] = [];
+const allPosts = await getCollection("blog");
+const postsByTag = getPostsByTag(allPosts, tag);
+const locales = getLocales();
+for (const locale of locales) {
+  const postsByTagAndLocale = getPostsByLocale(postsByTag, locale);
+  if (postsByTagAndLocale.length > 0) {
+    availableLocales.push(locale);
+  }
+}
+
+Astro.locals.localesOverride = availableLocales;
 ---
 
 <Layout title={`${m.text_tags_tag({ tagName })} | ${m.site_title()}`}>

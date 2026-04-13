@@ -29,7 +29,7 @@ const displayLocales = localesOverride ?? locales;
       const mt = useTranslations(locale as Locale);
       return (
         <option value={locale} selected={locale === currentLocale}>
-          {(mt[key] as () => string)()}
+          {typeof mt[key] === "function" ? (mt[key] as () => string)() : locale}
         </option>
       );
     })

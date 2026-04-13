@@ -36,7 +36,7 @@ if (breadcrumbPathList[0] === "tags") {
   breadcrumbLocalizedList[0] = m.text_tags();
   const allPosts = await getCollection("blog");
   const posts = getPostsByLocale(allPosts, currentLocale);
-  const tags = getUniqueTags(posts);
+  const tags = getUniqueTags(posts, currentLocale);
   const tagFromUrl = breadcrumbPathList[1]
     ? decodeURIComponent(breadcrumbPathList[1])
     : "";
