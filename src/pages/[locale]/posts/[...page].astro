@@ -10,6 +10,7 @@ import { getPostsByLocale } from "@/utils/getPostsByLocale";
 import getSortedPosts from "@/utils/getSortedPosts";
 import {
 getLocaleFromFilePath,
+getLocales,
 useTranslations,
 type Locale,
 } from "@/utils/locale";
@@ -33,6 +34,20 @@ const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
 
 const { page } = Astro.props;
+
+const availableLocales: Locale[] = [];
+const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+const locales = getLocales();
+for (const locale of locales) {
+  const postsByLocale = getPostsByLocale(allPosts, locale);
+  const postsByLocaleCount = postsByLocale.length;
+  const pagesCount = Math.ceil(postsByLocaleCount / page.size);
+  if (pagesCount >= page.currentPage) {
+    availableLocales.push(locale);
+  }
+}
+
+Astro.locals.localesOverride = availableLocales;
 ---
 
 <Layout title={`${m.text_posts()} | ${m.site_title()}`}>

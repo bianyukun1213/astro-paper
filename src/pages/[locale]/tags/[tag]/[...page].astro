@@ -48,7 +48,9 @@ const postsByTag = getPostsByTag(allPosts, tag);
 const locales = getLocales();
 for (const locale of locales) {
   const postsByTagAndLocale = getPostsByLocale(postsByTag, locale);
-  if (postsByTagAndLocale.length > 0) {
+  const postsByTagAndLocaleCount = postsByTagAndLocale.length;
+  const pagesCount = Math.ceil(postsByTagAndLocaleCount / page.size);
+  if (pagesCount >= page.currentPage) {
     availableLocales.push(locale);
   }
 }
