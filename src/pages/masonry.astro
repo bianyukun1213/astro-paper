@@ -1,0 +1,140 @@
+---
+import TideDialogImageViewer from "@/components/TideDialogImageViewer.astro";
+import TideImageMasonry from "@/components/TideImageMasonry.astro";
+import TideMasonryItem from "@/components/TideMasonryItem.astro";
+import TidePicture from "@/components/TidePicture.astro";
+import Layout from "@/layouts/Layout.astro";
+import type { Locale } from "@/paraglide/runtime";
+import { getLocales, useTranslations } from "@/utils/locale";
+// import { getLocales } from '@/libs/utils';
+import type { GetStaticPaths } from "astro";
+// import { getRelativeLocaleUrlList } from 'astro:i18n';
+import myImage from "E:\\Users\\Hollis\\Desktop\\astro-cap.jt5HlOg8_1PlEan.webp";
+
+export const getStaticPaths = (async () => {
+  const locales = getLocales();
+  return locales.map(locale => ({
+    params: { locale },
+  }));
+}) satisfies GetStaticPaths;
+
+const m = useTranslations(Astro.currentLocale as Locale);
+---
+
+<Layout>
+  <div style="absolute size-full">
+    <TideDialogImageViewer />
+    <TideImageMasonry>
+      <!-- <TideMasonryItem
+                class="bg-amber-500"
+                src="https://placehold.co/600x400/EEE/31343C"
+                inferSize
+                formats={['avif', 'webp']}
+                alt="A description of my image."
+            /> -->
+      <TideMasonryItem
+        class="bg-amber-500"
+        imgClass="bg-blue-500"
+        src={myImage}
+        formats={["avif", "webp"]}
+        alt="A description of my image."
+      />
+      <TideMasonryItem
+        class="bg-amber-500"
+        src={myImage}
+        inferSize
+        formats={["avif", "webp"]}
+        alt="A description of my image."
+      />
+      <TideMasonryItem
+        mask="aaa"
+        class="bg-amber-500"
+        src={myImage}
+        inferSize
+        formats={["avif", "webp"]}
+        alt="A description of my image."
+      />
+      <TideMasonryItem
+        class="bg-amber-500"
+        src={myImage}
+        inferSize
+        formats={["avif", "webp"]}
+        alt="A description of my image."
+      />
+    </TideImageMasonry>
+    <TideImageMasonry>
+      <TideMasonryItem
+        class="bg-amber-500"
+        src={myImage}
+        formats={["avif", "webp"]}
+        alt="A description of my image."
+      />
+      <TideMasonryItem
+        mask=""
+        class="bg-amber-500"
+        src={myImage}
+        inferSize
+        formats={["avif", "webp"]}
+        alt="A description of my image."
+      />
+      <TideMasonryItem
+        title="《我的世界》"
+        caption="《我的世界》中由程序生成的地形的一个示例，图中包含的元素有玩家史蒂夫，平原、森林、高山生物群系和一个村庄"
+        src={myImage}
+        inferSize
+        formats={["avif", "webp"]}
+        alt="A description of my image."
+      />
+      <TideMasonryItem
+        class="bg-amber-500"
+        src={myImage}
+        inferSize
+        formats={["avif", "webp"]}
+        alt="A description of my image."
+      />
+      <TideMasonryItem
+        intent="inline"
+        class="bg-amber-500"
+        src={myImage}
+        inferSize
+        formats={["avif", "webp"]}
+        alt="A description of my image."
+      />
+    </TideImageMasonry>
+    <TidePicture
+      src={myImage}
+      inferSize
+      formats={["avif", "webp"]}
+      alt="A description of my image."
+      title="only title"
+    />
+    <TidePicture
+      src={myImage}
+      inferSize
+      formats={["avif", "webp"]}
+      alt="A description of my image."
+      caption="only caption"
+    />
+    <TidePicture
+      mask="aaa"
+      src={myImage}
+      inferSize
+      formats={["avif", "webp"]}
+      alt="A description of my image."
+      title="title"
+      caption="caption"
+    />
+    <div class="w-full bg-purple-500">
+      <TidePicture
+        intent="inline"
+        class="bg-green-500"
+        src={myImage}
+        inferSize
+        formats={["avif", "webp"]}
+        alt="A description of my image."
+        title="title"
+        caption="caption"
+      />
+    </div>
+  </div>
+</Layout>

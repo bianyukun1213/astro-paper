@@ -15,23 +15,32 @@
     "compile-messages": "paraglide-js compile --project ./project.inlang --outdir ./src\\paraglide --emit-ts-declarations"
   },
   "dependencies": {
+    "@astrojs/alpinejs": "^0.5.0",
     "@astrojs/compiler-rs": "^0.1.6",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.2.2",
+    "@types/alpinejs": "^3.13.11",
+    "alpinejs": "^3.15.11",
     "astro": "^6.1.5",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "dayjs": "^1.11.20",
     "lodash.kebabcase": "^4.1.1",
+    "photoswipe": "^5.4.4",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
     "satori": "^0.26.0",
     "sharp": "^0.34.5",
     "slugify": "^1.6.9",
+    "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.8",
+    "@inlang/cli": "^3.1.9",
+    "@inlang/paraglide-js": "^2.15.3",
     "@pagefind/default-ui": "^1.5.0",
     "@shikijs/transformers": "^4.0.2",
     "@tailwindcss/typography": "^0.5.19",
@@ -44,9 +53,8 @@
     "prettier": "^3.8.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
+    "tailwind-resolver": "^0.3.8",
     "typescript": "^6.0.2",
-    "typescript-eslint": "^8.58.1",
-    "@inlang/paraglide-js": "^2.15.3",
-    "@inlang/cli": "^3.1.9"
+    "typescript-eslint": "^8.58.1"
   }
 }

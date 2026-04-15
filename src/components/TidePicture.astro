@@ -1,0 +1,104 @@
+---
+import type { Locale } from "@/paraglide/runtime";
+import { cn } from "@/utils/cn";
+import { useTranslations } from "@/utils/locale";
+import { Picture } from "astro:assets";
+import { cva, type VariantProps } from "class-variance-authority";
+
+const m = useTranslations(Astro.currentLocale as Locale);
+
+const figureVariants = cva("tide-image-figure", {
+  variants: {
+    intent: {
+      block: "tide-image-figure-block",
+      inline: "tide-image-figure-inline",
+    },
+  },
+  defaultVariants: {
+    intent: "block",
+  },
+});
+const imageVariants = cva("tide-image", {
+  variants: {
+    intent: {
+      block: "tide-image-block",
+      inline: "tide-image-inline",
+    },
+  },
+  defaultVariants: {
+    intent: "block",
+  },
+});
+
+export type Props = Parameters<typeof Picture>[0] &
+  VariantProps<typeof figureVariants> & {
+    imgClass?: string;
+    caption?: string;
+    mask?: string | boolean;
+  };
+const {
+  class: className,
+  imgClass,
+  intent,
+  title,
+  caption,
+  mask,
+  ...attrs
+} = Astro.props;
+delete attrs["data-mask"];
+delete attrs["data-revealed"];
+delete attrs["tabindex"];
+---
+
+<figure
+  class={cn(figureVariants({ intent }), className)}
+  data-mask={mask || mask === ""
+    ? typeof mask === "string" && mask
+      ? mask
+      : m.text_tide_picture_default_mask()
+    : undefined}
+  x-data="{figureEle:$el}"
+  x-init=" if(figureEle.dataset.mask)$store.images.registerMask(figureEle.dataset.imageId);"
+  :data-revealed="$store.images.isRevealed(figureEle.dataset.imageId)?'true':null"
+>
+  {
+    (mask || mask === "") && (
+      <div
+        class="tide-image-mask"
+        x-show="!$store.images.isRevealed(figureEle.dataset.imageId)"
+      >
+        <div class="tide-image-mask-control">
+          <div class="tide-image-mask-title">
+            {typeof mask === "string" && mask
+              ? mask
+              : m.text_tide_picture_default_mask()}
+          </div>
+          <button
+            class="tide-button-reveal tide-button tide-button-link"
+            @click.stop="$store.images.reveal(figureEle.dataset.imageId)"
+          >
+            {m.btn_tide_picture_reveal_title()}
+          </button>
+        </div>
+      </div>
+    )
+  }
+  <Picture
+    class={cn(imageVariants({ intent }), imgClass)}
+    title={title}
+    data-caption={caption}
+    aria-hidden={mask || mask === "" ? "true" : "false"}
+    :class="$store.images.isRevealed(figureEle.dataset.imageId)?'tide-dynamic-cursor-zoom-in':''"
+    :tabindex="$store.images.isRevealed(figureEle.dataset.imageId)?0:-1"
+    :role="$store.images.isRevealed(figureEle.dataset.imageId)?'button':null"
+    :aria-hidden="$store.images.isRevealed(figureEle.dataset.imageId)?'false':'true'"
+    {...attrs}
+  />
+  {
+    (caption || title) && (
+      <figcaption class="tide-image-figure-caption">
+        {caption || title}
+      </figcaption>
+    )
+  }
+</figure>

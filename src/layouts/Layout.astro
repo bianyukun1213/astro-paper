@@ -10,6 +10,7 @@ import {
   useTranslations,
   type Locale,
 } from "@/utils/locale";
+import { defaultTheme } from "@/generated/tailwindcss";
 
 type Props = {
   title?: string;
@@ -77,6 +78,13 @@ const structuredData = {
     },
   ],
 };
+
+const sm = defaultTheme.breakpoints.sm;
+const md = defaultTheme.breakpoints.md;
+const lg = defaultTheme.breakpoints.lg;
+const xl = defaultTheme.breakpoints.xl;
+const xxl = defaultTheme.breakpoints["2xl"];
+const breakpoints = { sm, md, lg, xl, "2xl": xxl };
 ---
 
 <!doctype html>
@@ -84,6 +92,7 @@ const structuredData = {
   dir={getLocaleDir(currentLocale)}
   lang={currentLocale}
   class={`${scrollSmooth && "scroll-smooth"}`}
+  data-tide-breakpoints={JSON.stringify(breakpoints)}
 >
   <head>
     <meta charset="UTF-8" />

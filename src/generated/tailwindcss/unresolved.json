@@ -1,0 +1,55 @@
+{
+  "generatedAt": "2026-04-15T04:53:39.162Z",
+  "source": "..\\..\\styles\\global.css",
+  "version": "5.5.1",
+  "summary": {
+    "total": 6,
+    "external": 0,
+    "selfReferential": 0,
+    "unknown": 6
+  },
+  "unresolved": [
+    {
+      "variableName": "--font-app",
+      "originalValue": "var(--font-locale)",
+      "referencedVariable": "--font-locale",
+      "source": "theme",
+      "likelyCause": "unknown"
+    },
+    {
+      "variableName": "--color-background",
+      "originalValue": "var(--background)",
+      "referencedVariable": "--background",
+      "source": "theme",
+      "likelyCause": "unknown"
+    },
+    {
+      "variableName": "--color-foreground",
+      "originalValue": "var(--foreground)",
+      "referencedVariable": "--foreground",
+      "source": "theme",
+      "likelyCause": "unknown"
+    },
+    {
+      "variableName": "--color-accent",
+      "originalValue": "var(--accent)",
+      "referencedVariable": "--accent",
+      "source": "theme",
+      "likelyCause": "unknown"
+    },
+    {
+      "variableName": "--color-muted",
+      "originalValue": "var(--muted)",
+      "referencedVariable": "--muted",
+      "source": "theme",
+      "likelyCause": "unknown"
+    },
+    {
+      "variableName": "--color-border",
+      "originalValue": "var(--border)",
+      "referencedVariable": "--border",
+      "source": "theme",
+      "likelyCause": "unknown"
+    }
+  ]
+}

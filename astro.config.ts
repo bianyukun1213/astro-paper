@@ -1,3 +1,4 @@
+import alpinejs from "@astrojs/alpinejs";
 import sitemap from "@astrojs/sitemap";
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import {
@@ -9,6 +10,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField, fontProviders } from "astro/config";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
+import { tailwindResolver } from "tailwind-resolver/vite";
 import { SITE } from "./src/config";
 import { transformerFileName } from "./src/utils/transformers/fileName";
 
@@ -22,6 +24,7 @@ export default defineConfig({
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
     }),
+    alpinejs(),
   ],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
@@ -47,6 +50,11 @@ export default defineConfig({
       // eslint-disable-next-line
       // @ts-ignore
       tailwindcss(),
+      // eslint-disable-next-line
+      // @ts-ignore
+      tailwindResolver({
+        input: "./src/styles/global.css", // Your Tailwind CSS file
+      }),
       // eslint-disable-next-line
       // @ts-ignore
       paraglideVitePlugin({

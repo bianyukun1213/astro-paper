@@ -1,0 +1,10 @@
+---
+import { cn } from "@/utils/cn";
+import TidePicture from "./TidePicture.astro";
+
+export type Props = Parameters<typeof TidePicture>[0];
+const { class: className, ...attrs } = Astro.props;
+attrs.intent = "block";
+---
+
+<TidePicture class={cn("tide-image-masonry-item", className)} {...attrs} />

@@ -1,0 +1,81 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/utils/cn";
+
+export type Props = HTMLAttributes<"div">;
+const { class: className, ...attrs } = Astro.props;
+---
+
+<div class={cn("tide-image-masonry", className)} {...attrs}>
+  <slot />
+</div>
+<script>
+  interface BreakAt {
+    [key: string]: {
+      columns: number;
+      margin?: number;
+    };
+  }
+  const breakAt: BreakAt = {};
+  import { convertRemPx } from "@/utils/convertRemPx";
+  const breakpoints = JSON.parse(
+    document.documentElement.dataset.tideBreakpoints ?? "{}"
+  ) as Record<string, string>;
+  for (const key in breakpoints) {
+    if (!Object.hasOwn(breakpoints, key)) continue;
+    const pxStr = convertRemPx(breakpoints[key]).replace("px", "");
+    switch (key) {
+      case "sm": {
+        breakAt[pxStr] = {
+          columns: 1,
+        };
+        break;
+      }
+      case "md": {
+        breakAt[pxStr] = {
+          columns: 1,
+        };
+        break;
+      }
+      case "lg": {
+        breakAt[pxStr] = {
+          columns: 2,
+          margin: 4, // Starting from 'lg', margins handled by this lib and set to '0' in TideMasonryItem.astro and global.css.
+        };
+        break;
+      }
+      case "xl": {
+        breakAt[pxStr] = {
+          columns: 3,
+          margin: 4,
+        };
+        break;
+      }
+      case "2xl": {
+        breakAt[pxStr] = {
+          columns: 3,
+          margin: 4,
+        };
+        break;
+      }
+    }
+  }
+  console.log("Tide Image Masonry breakAt:", breakAt);
+  // From unmerged commit which supports rtl and doesn't calculate the layout when there is only one column.
+  // https://github.com/bigbite/macy.js/blob/a04331f537357e9f62f147bdcb058c7af5178bce/dist/macy.esm.js
+  // https://github.com/bigbite/macy.js
+  // todo: 尝试设置 mobileFirst
+  // todo: rtl 从页面主体获取
+  import Macy from "@/scripts/macy.esm.js";
+  const masonryElements = document.getElementsByClassName("tide-image-masonry");
+  for (const masonryElement of masonryElements) {
+    new Macy({
+      container: masonryElement,
+      columns: 1,
+      margin: 0, // Handled in TideMasonryItem.astro and global.css: tw:mb-[8px]
+      rtl: false,
+      mobileFirst: true,
+      breakAt,
+    });
+  }
+</script>

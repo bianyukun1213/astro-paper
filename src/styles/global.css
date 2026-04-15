@@ -152,3 +152,92 @@ html[lang="zh-CN"] #article p,
 html[lang="zh-CN"] #about p {
   @apply indent-8;
 }
+
+@layer components {
+  .tide-image-figure {
+    @apply relative;
+  }
+
+  .tide-image-figure-block {
+    @apply mx-auto max-w-1/2;
+  }
+
+  .tide-image-figure-inline {
+    @apply inline-block;
+  }
+
+  .tide-image-figure-block .tide-image-figure-caption {
+    @apply mx-auto mt-1 h-5 max-w-4/5 text-center text-muted;
+  }
+
+  .tide-image-figure-inline .tide-image-figure-caption,
+  .tide-image-masonry .tide-image-figure-caption {
+    @apply sr-only;
+  }
+
+  .tide-image-block {
+    @apply block w-full max-w-full;
+  }
+
+  .tide-image-inline {
+    @apply inline align-baseline;
+  }
+
+  .tide-image-figure-block .tide-image-mask {
+    /* @apply absolute z-10 size-full text-center backdrop-blur-3xl backdrop-brightness-50; */
+    @apply absolute z-10 h-[calc(100%-var(--tw-spacing)*6)] w-full text-center backdrop-blur-3xl backdrop-brightness-50;
+  }
+
+  .tide-image-figure-inline .tide-image-mask,
+  .tide-image-masonry .tide-image-mask {
+    @apply absolute z-10 size-full text-center backdrop-blur-3xl backdrop-brightness-50;
+  }
+
+  /* .tide-image-mask:has(+ img:not([data-mask])),
+    .tide-image-mask:has(+ img[data-revealed]),
+    .tide-image-mask:has(+ picture img:not([data-mask])),
+    .tide-image-mask:has(+ picture img[data-revealed]) {
+        @apply invisible;
+    } */
+
+  .tide-image-mask-control {
+    @apply absolute start-1/2 top-1/2 max-h-full w-full -translate-1/2 overflow-auto p-4 text-white;
+  }
+
+  .tide-image-mask-title {
+    @apply mb-4 overflow-hidden;
+  }
+
+  .tide-button-reveal {
+    /* 需要 text-white 。 */
+    @apply mx-auto text-white;
+  }
+
+  .tide-image-masonry {
+    @apply max-w-1/2;
+  }
+
+  .tide-image-masonry-item {
+    @apply mb-[8px] w-full max-w-full lg:mb-0;
+  }
+
+  .pswp__image-caption-container {
+    @apply pointer-events-none! absolute start-1/2 top-3/4 z-9! h-24 w-full -translate-x-1/2;
+  }
+
+  .pswp__image-caption {
+    @apply mx-auto line-clamp-3 max-h-full w-fit max-w-4/5 rounded-md bg-(--pswp-bg) px-2 py-1 text-center text-(--pswp-icon-color) sm:max-w-2/3;
+  }
+
+  .pswp__image-mask.pswp__image-masked {
+    @apply absolute size-full overflow-auto bg-(--pswp-bg) text-center text-(--pswp-icon-color);
+  }
+
+  .pswp__image-mask:not(.pswp__image-masked) {
+    @apply hidden;
+  }
+
+  .pswp__image-mask-title {
+    @apply absolute start-1/2 top-1/2 mb-4 max-h-full w-4/5 -translate-1/2;
+  }
+}
