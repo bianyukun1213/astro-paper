@@ -61,6 +61,12 @@ html[lang="zh-CN"] {
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+  .tide-dynamic-hidden {
+    @apply hidden!;
+  }
+  .tide-dynamic-cursor-zoom-in {
+    @apply cursor-zoom-in!;
+  }
 }
 
 @utility max-w-app {
@@ -82,7 +88,9 @@ html[lang="zh-CN"] {
 }
 
 @utility ht-* {
-  height: --spacing(--value(number));
+  height: --value([number]);
+  height: --value(number);
+  height: --value(--height-*);
 }
 @utility ht-auto {
   height: auto;
@@ -148,12 +156,20 @@ html[lang="zh-CN"] {
   @apply height-do-not-use;
 }
 
+@utility size-full {
+  @apply ht-full w-full;
+}
+
 html[lang="zh-CN"] #article p,
 html[lang="zh-CN"] #about p {
   @apply indent-8;
 }
 
 @layer components {
+  .tide-button-link {
+    @apply text-foreground border-0 bg-transparent underline hover:scale-none hover:underline-offset-4 active:scale-none disabled:hover:underline-offset-auto;
+  }
+
   .tide-image-figure {
     @apply relative;
   }
@@ -167,7 +183,7 @@ html[lang="zh-CN"] #about p {
   }
 
   .tide-image-figure-block .tide-image-figure-caption {
-    @apply mx-auto mt-1 h-5 max-w-4/5 text-center text-muted;
+    @apply mx-auto mt-1 ht-5 max-w-4/5 text-center text-muted;
   }
 
   .tide-image-figure-inline .tide-image-figure-caption,
@@ -185,7 +201,7 @@ html[lang="zh-CN"] #about p {
 
   .tide-image-figure-block .tide-image-mask {
     /* @apply absolute z-10 size-full text-center backdrop-blur-3xl backdrop-brightness-50; */
-    @apply absolute z-10 h-[calc(100%-var(--tw-spacing)*6)] w-full text-center backdrop-blur-3xl backdrop-brightness-50;
+    @apply absolute z-10 ht-[calc(100%-var(--spacing)*6)] w-full text-center backdrop-blur-3xl backdrop-brightness-50;
   }
 
   .tide-image-figure-inline .tide-image-mask,
@@ -222,7 +238,7 @@ html[lang="zh-CN"] #about p {
   }
 
   .pswp__image-caption-container {
-    @apply pointer-events-none! absolute start-1/2 top-3/4 z-9! h-24 w-full -translate-x-1/2;
+    @apply pointer-events-none! absolute start-1/2 top-3/4 z-9! ht-24 w-full -translate-x-1/2;
   }
 
   .pswp__image-caption {

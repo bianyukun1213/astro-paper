@@ -58,7 +58,7 @@ delete attrs["tabindex"];
       : m.text_tide_picture_default_mask()
     : undefined}
   x-data="{figureEle:$el}"
-  x-init=" if(figureEle.dataset.mask)$store.images.registerMask(figureEle.dataset.imageId);"
+  x-init=" if(figureEle.dataset.mask)$store.images.registerMask(figureEle.dataset.imageId)"
   :data-revealed="$store.images.isRevealed(figureEle.dataset.imageId)?'true':null"
 >
   {
