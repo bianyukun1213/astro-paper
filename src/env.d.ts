@@ -7,6 +7,7 @@ interface Window {
     setTheme: (val: string) => void;
   };
   Alpine: import("alpinejs").Alpine;
+  tideMeta: import("@/utils/types").TideMeta;
   m: import("@/paraglide/messages.js").m;
   setLocale: import("@/paraglide/runtime").SetLocaleFn;
 }

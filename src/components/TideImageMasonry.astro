@@ -18,9 +18,7 @@ const { class: className, ...attrs } = Astro.props;
   }
   const breakAt: BreakAt = {};
   import { convertRemPx } from "@/utils/convertRemPx";
-  const breakpoints = JSON.parse(
-    document.documentElement.dataset.tideBreakpoints ?? "{}"
-  ) as Record<string, string>;
+  const breakpoints = window.tideMeta.breakpoints;
   for (const key in breakpoints) {
     if (!Object.hasOwn(breakpoints, key)) continue;
     const pxStr = convertRemPx(breakpoints[key]).replace("px", "");
@@ -60,7 +58,6 @@ const { class: className, ...attrs } = Astro.props;
       }
     }
   }
-  console.log("Tide Image Masonry breakAt:", breakAt);
   // From unmerged commit which supports rtl and doesn't calculate the layout when there is only one column.
   // https://github.com/bigbite/macy.js/blob/a04331f537357e9f62f147bdcb058c7af5178bce/dist/macy.esm.js
   // https://github.com/bigbite/macy.js
@@ -73,7 +70,7 @@ const { class: className, ...attrs } = Astro.props;
       container: masonryElement,
       columns: 1,
       margin: 0, // Handled in TideMasonryItem.astro and global.css: tw:mb-[8px]
-      rtl: false,
+      rtl: document.documentElement.dir === "rtl",
       mobileFirst: true,
       breakAt,
     });

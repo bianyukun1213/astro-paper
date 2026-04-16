@@ -3,10 +3,7 @@ import PostDetails from "@/layouts/PostDetails.astro";
 import { getPath } from "@/utils/getPath";
 import { getPostsByLocale } from "@/utils/getPostsByLocale";
 import getSortedPosts from "@/utils/getSortedPosts";
-import {
-getLocaleFromFilePath,
-type Locale
-} from "@/utils/locale";
+import { getLocaleFromFilePath, type Locale } from "@/utils/locale";
 import type { GetStaticPaths } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 

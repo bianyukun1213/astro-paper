@@ -167,7 +167,7 @@ html[lang="zh-CN"] #about p {
 
 @layer components {
   .tide-button-link {
-    @apply text-foreground border-0 bg-transparent underline hover:scale-none hover:underline-offset-4 active:scale-none disabled:hover:underline-offset-auto;
+    @apply border-0 bg-transparent text-foreground underline hover:scale-none hover:underline-offset-4 active:scale-none disabled:hover:underline-offset-auto;
   }
 
   .tide-image-figure {
@@ -175,7 +175,7 @@ html[lang="zh-CN"] #about p {
   }
 
   .tide-image-figure-block {
-    @apply mx-auto max-w-1/2;
+    @apply mx-auto my-0 max-w-1/2;
   }
 
   .tide-image-figure-inline {

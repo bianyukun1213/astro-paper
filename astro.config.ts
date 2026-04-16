@@ -1,4 +1,5 @@
 import alpinejs from "@astrojs/alpinejs";
+import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import {
@@ -22,9 +23,10 @@ export default defineConfig({
   trailingSlash: "always",
   integrations: [
     sitemap({
-      filter: page => SITE.showArchives || !page.endsWith("/archives"),
+      filter: page => SITE.showArchives || !page.endsWith("/archives/"),
     }),
     alpinejs(),
+    mdx(),
   ],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],

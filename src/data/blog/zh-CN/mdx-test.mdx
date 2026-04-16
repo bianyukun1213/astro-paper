@@ -1,0 +1,124 @@
+---
+author: Hollis
+pubDatetime: 2026-04-16T20:56:40+08:00
+modDatetime: 2026-04-16T20:56:45+08:00
+title: MDX 测试
+featured: false
+draft: false
+tags:
+  - i18n
+  - 中文
+description: This is a test.
+---
+
+import TideDialogImageViewer from "@/components/TideDialogImageViewer.astro";
+import TideImageMasonry from "@/components/TideImageMasonry.astro";
+import TideMasonryItem from "@/components/TideMasonryItem.astro";
+import TidePicture from "@/components/TidePicture.astro";
+import myImage from "D:\\Users\\Hollis\\Desktop\\astro-cap.jt5HlOg8_1PlEan.webp";
+
+<TideImageMasonry>
+  <TideMasonryItem
+    class="bg-amber-500"
+    imgClass="bg-blue-500"
+    src={myImage}
+    formats={["avif", "webp"]}
+    alt="A description of my image."
+  />
+  <TideMasonryItem
+    class="bg-amber-500"
+    src={myImage}
+    inferSize
+    formats={["avif", "webp"]}
+    alt="A description of my image."
+  />
+  <TideMasonryItem
+    mask="aaa"
+    class="bg-amber-500"
+    src={myImage}
+    inferSize
+    formats={["avif", "webp"]}
+    alt="A description of my image."
+  />
+  <TideMasonryItem
+    class="bg-amber-500"
+    src={myImage}
+    inferSize
+    formats={["avif", "webp"]}
+    alt="A description of my image."
+  />
+</TideImageMasonry>
+<TideImageMasonry>
+  <TideMasonryItem
+    class="bg-amber-500"
+    src={myImage}
+    formats={["avif", "webp"]}
+    alt="A description of my image."
+  />
+  <TideMasonryItem
+    mask=""
+    class="bg-amber-500"
+    src={myImage}
+    inferSize
+    formats={["avif", "webp"]}
+    alt="A description of my image."
+  />
+  <TideMasonryItem
+    title="《我的世界》"
+    caption="《我的世界》中由程序生成的地形的一个示例，图中包含的元素有玩家史蒂夫，平原、森林、高山生物群系和一个村庄"
+    src={myImage}
+    inferSize
+    formats={["avif", "webp"]}
+    alt="A description of my image."
+  />
+  <TideMasonryItem
+    class="bg-amber-500"
+    src={myImage}
+    inferSize
+    formats={["avif", "webp"]}
+    alt="A description of my image."
+  />
+  <TideMasonryItem
+    intent="inline"
+    class="bg-amber-500"
+    src={myImage}
+    inferSize
+    formats={["avif", "webp"]}
+    alt="A description of my image."
+  />
+</TideImageMasonry>
+<TidePicture
+  src={myImage}
+  inferSize
+  formats={["avif", "webp"]}
+  alt="A description of my image."
+  title="only title"
+/>
+<TidePicture
+  src={myImage}
+  inferSize
+  formats={["avif", "webp"]}
+  alt="A description of my image."
+  caption="only caption"
+/>
+<TidePicture
+  mask="aaa"
+  src={myImage}
+  inferSize
+  formats={["avif", "webp"]}
+  alt="A description of my image."
+  title="title"
+  caption="caption"
+/>
+<div class="w-full bg-purple-500">
+  <TidePicture
+    intent="inline"
+    class="bg-green-500"
+    src={myImage}
+    inferSize
+    formats={["avif", "webp"]}
+    alt="A description of my image."
+    title="title"
+    caption="caption"
+  />
+</div>

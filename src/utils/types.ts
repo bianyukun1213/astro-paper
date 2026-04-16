@@ -5,3 +5,7 @@ export interface AlpineStoreImages {
   reveal(id: string): void;
   isRevealed(id: string): boolean;
 }
+
+export interface TideMeta {
+  breakpoints: Record<string, string>;
+}

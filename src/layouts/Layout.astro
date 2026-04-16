@@ -11,6 +11,8 @@ import {
   type Locale,
 } from "@/utils/locale";
 import { defaultTheme } from "@/generated/tailwindcss";
+import type { TideMeta } from "@/utils/types";
+import TideDialogImageViewer from "@/components/TideDialogImageViewer.astro";
 
 type Props = {
   title?: string;
@@ -85,6 +87,7 @@ const lg = defaultTheme.breakpoints.lg;
 const xl = defaultTheme.breakpoints.xl;
 const xxl = defaultTheme.breakpoints["2xl"];
 const breakpoints = { sm, md, lg, xl, "2xl": xxl };
+const tideMeta: TideMeta = { breakpoints };
 ---
 
 <!doctype html>
@@ -92,7 +95,6 @@ const breakpoints = { sm, md, lg, xl, "2xl": xxl };
   dir={getLocaleDir(currentLocale)}
   lang={currentLocale}
   class={`${scrollSmooth && "scroll-smooth"}`}
-  data-tide-breakpoints={JSON.stringify(breakpoints)}
 >
   <head>
     <meta charset="UTF-8" />
@@ -181,6 +183,9 @@ const breakpoints = { sm, md, lg, xl, "2xl": xxl };
       )
     }
 
+    <!-- Tide meta data  -->
+    <meta name="tide-meta" content={JSON.stringify(tideMeta)} />
+
     <ClientRouter />
 
     <!-- Minimal inline script to prevent FOUC - sets theme immediately -->
@@ -214,10 +219,16 @@ const breakpoints = { sm, md, lg, xl, "2xl": xxl };
     </script>
   </head>
   <body>
+    <TideDialogImageViewer />
     <script>
       import { m } from "@/paraglide/messages.js";
 import { setLocale, type Locale } from "@/paraglide/runtime";
 import type { AlpineStoreImages } from "@/utils/types";
+      window.tideMeta = JSON.parse(
+        document
+          .querySelector('meta[name="tide-meta"]')
+          ?.getAttribute("content") || "{}"
+      );
       window.m = m;
       window.setLocale = setLocale;
       window.setLocale(document.documentElement.lang as Locale);
