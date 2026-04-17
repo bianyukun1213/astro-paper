@@ -230,11 +230,11 @@ html[lang="zh-CN"] #about p {
   }
 
   .tide-image-masonry {
-    @apply max-w-1/2;
+    @apply mx-auto max-w-full;
   }
 
   .tide-image-masonry-item {
-    @apply mb-[8px] w-full max-w-full lg:mb-0;
+    @apply mb-[8px] w-full max-w-full md:mb-0;
   }
 
   .pswp__image-caption-container {

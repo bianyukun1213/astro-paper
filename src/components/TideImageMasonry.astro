@@ -31,14 +31,15 @@ const { class: className, ...attrs } = Astro.props;
       }
       case "md": {
         breakAt[pxStr] = {
-          columns: 1,
+          columns: 2,
+          margin: 4, // Starting from 'md', margins handled by this lib and set to '0' in TideMasonryItem.astro and global.css.
         };
         break;
       }
       case "lg": {
         breakAt[pxStr] = {
-          columns: 2,
-          margin: 4, // Starting from 'lg', margins handled by this lib and set to '0' in TideMasonryItem.astro and global.css.
+          columns: 3,
+          margin: 4,
         };
         break;
       }
@@ -64,15 +65,25 @@ const { class: className, ...attrs } = Astro.props;
   // todo: 尝试设置 mobileFirst
   // todo: rtl 从页面主体获取
   import Macy from "@/scripts/macy.esm.js";
-  const masonryElements = document.getElementsByClassName("tide-image-masonry");
-  for (const masonryElement of masonryElements) {
-    new Macy({
-      container: masonryElement,
-      columns: 1,
-      margin: 0, // Handled in TideMasonryItem.astro and global.css: tw:mb-[8px]
-      rtl: document.documentElement.dir === "rtl",
-      mobileFirst: true,
-      breakAt,
-    });
+
+  function initMasonry() {
+    const masonryElements =
+      document.getElementsByClassName("tide-image-masonry");
+    for (const masonryElement of masonryElements) {
+      const intance = new Macy({
+        container: masonryElement,
+        useContainerForBreakpoints: false,
+        columns: 1,
+        margin: 0, // Handled in TideMasonryItem.astro and global.css: tw:mb-[8px]
+        rtl: document.documentElement.dir === "rtl",
+        mobileFirst: true,
+        breakAt,
+      });
+      intance.runOnImageLoad(() => {
+        intance.recalculate(true);
+      }, true);
+    }
   }
+
+  document.addEventListener("astro:page-load", initMasonry);
 </script>
