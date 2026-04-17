@@ -65,7 +65,6 @@ const { class: className, ...attrs } = Astro.props;
   // todo: 尝试设置 mobileFirst
   // todo: rtl 从页面主体获取
   import Macy from "@/scripts/macy.esm.js";
-
   function initMasonry() {
     const masonryElements =
       document.getElementsByClassName("tide-image-masonry");
@@ -84,6 +83,5 @@ const { class: className, ...attrs } = Astro.props;
       }, true);
     }
   }
-
   document.addEventListener("astro:page-load", initMasonry);
 </script>
