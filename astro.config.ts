@@ -25,7 +25,7 @@ export default defineConfig({
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives/"),
     }),
-    alpinejs(),
+    alpinejs({ entrypoint: "/src/entrypoint" }),
     mdx(),
   ],
   markdown: {

@@ -7,6 +7,7 @@ import IconPinterest from "@/assets/icons/IconPinterest.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
 import { useTranslations, type Locale } from "@/utils/locale";
+import type { HCard } from "@/utils/types";
 import type { Props } from "astro";
 
 export interface Social {
@@ -86,4 +87,15 @@ export function getLocalizedShareLinks(locale: Locale): Social[] {
       icon: IconMail,
     },
   ];
+}
+
+export function getLocalizedHCard(locale: Locale): HCard {
+  const t = useTranslations(locale);
+  return {
+    pName: t.h_card_p_name(),
+    uPhoto: t.h_card_u_photo(),
+    uUrl: t.h_card_u_url(),
+    uEmail: t.h_card_u_email(),
+    pNote: t.h_card_p_note(),
+  };
 }

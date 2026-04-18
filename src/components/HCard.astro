@@ -1,0 +1,27 @@
+---
+import type { HCard as HCardType } from "@/utils/types";
+
+type Props = {
+  hCard: HCardType;
+};
+
+const { hCard } = Astro.props;
+---
+
+<div class="h-card hidden">
+  <span class="p-name">{hCard.pName}</span>
+  <img class="u-photo" src={hCard.uPhoto} alt={hCard.pName} />
+  <a
+    class="u-url u-uid"
+    href={hCard.uUrl}
+    target="_blank"
+    rel="noopener noreferrer">{hCard.uUrl}</a
+  >
+  <a
+    class="u-email"
+    href={`mailto:${hCard.uEmail}`}
+    target="_blank"
+    rel="noopener noreferrer">{hCard.uEmail}</a
+  >
+  <span class="p-note">{hCard.pNote}</span>
+</div>

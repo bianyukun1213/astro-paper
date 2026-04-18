@@ -1,6 +1,8 @@
 ---
+import { getLocalizedHCard } from "@/constants";
 import { useTranslations, type Locale } from "@/utils/locale";
 import type { HTMLAttributes } from "astro/types";
+import HCard from "./HCard.astro";
 import Socials from "./Socials.astro";
 
 const currentYear = new Date().getFullYear();
@@ -33,4 +35,5 @@ const m = useTranslations(currentLocale);
       <span>{m.text_all_rights_reserved()}</span>
     </div>
   </div>
+  <HCard hCard={getLocalizedHCard(currentLocale)} />
 </footer>

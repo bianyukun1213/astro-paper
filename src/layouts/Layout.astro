@@ -13,6 +13,7 @@ import {
 import { defaultTheme } from "@/generated/tailwindcss";
 import type { TideMeta } from "@/utils/types";
 import TideDialogImageViewer from "@/components/TideDialogImageViewer.astro";
+import HCard from "@/components/HCard.astro";
 
 type Props = {
   title?: string;
@@ -217,13 +218,9 @@ const tideMeta: TideMeta = { breakpoints };
         };
       })();
     </script>
-  </head>
-  <body>
-    <TideDialogImageViewer />
     <script>
       import { m } from "@/paraglide/messages.js";
 import { setLocale, type Locale } from "@/paraglide/runtime";
-import type { AlpineStoreImages } from "@/utils/types";
       window.tideMeta = JSON.parse(
         document
           .querySelector('meta[name="tide-meta"]')
@@ -232,30 +229,10 @@ import type { AlpineStoreImages } from "@/utils/types";
       window.m = m;
       window.setLocale = setLocale;
       window.setLocale(document.documentElement.lang as Locale);
-      document.addEventListener("alpine:init", () => {
-        // console.log('alpine')
-        // genId();
-        window.Alpine.store("images", {
-          maskedIds: [],
-          revealedIds: [],
-          registerMask(id: string) {
-            if (!this.maskedIds.includes(id)) {
-              this.maskedIds.push(id);
-            }
-          },
-          reveal(id: string) {
-            if (!this.revealedIds.includes(id)) {
-              this.revealedIds.push(id);
-            }
-          },
-          isRevealed(id: string) {
-            const hasMask = this.maskedIds.includes(id);
-            const isUnlocked = this.revealedIds.includes(id);
-            return !hasMask || isUnlocked;
-          },
-        } as AlpineStoreImages);
-      });
     </script>
+  </head>
+  <body>
+    <TideDialogImageViewer />
 
     <slot />
 

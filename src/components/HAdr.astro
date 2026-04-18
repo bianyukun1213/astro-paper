@@ -1,0 +1,24 @@
+---
+import type { HAdr as HAdrType } from "@/utils/types";
+
+type Props = {
+  hAdr: HAdrType;
+};
+
+const { hAdr } = Astro.props;
+---
+
+<div class="p-location h-adr hidden">
+  <span class="p-street-address">{hAdr.pStreetAddress}</span>
+  {
+    hAdr.pExtendedAddress && (
+      <span class="p-extended-address">{hAdr.pExtendedAddress}</span>
+    )
+  }
+  <span class="p-locality">{hAdr.pLocality}</span>
+  <span class="p-region">{hAdr.pRegion}</span>
+  <span class="p-country-name">{hAdr.pCountryName}</span>
+  {hAdr.pLongitude && <span class="p-longitude">{hAdr.pLongitude}</span>}
+  {hAdr.pLatitude && <span class="p-latitude">{hAdr.pLatitude}</span>}
+  {hAdr.pAltitude && <span class="p-altitude">{hAdr.pAltitude}</span>}
+</div>

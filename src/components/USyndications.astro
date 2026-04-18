@@ -1,0 +1,46 @@
+---
+import IconCopy from "@/assets/icons/IconCopy.svg";
+import { useTranslations, type Locale } from "@/utils/locale";
+
+const currentLocale = Astro.currentLocale as Locale;
+const m = useTranslations(currentLocale);
+
+type Props = {
+  syndications: string[];
+  class?: string;
+  size?: "sm" | "lg";
+};
+
+const { syndications, size = "sm", class: className = "" } = Astro.props;
+---
+
+<div class:list={["flex items-center gap-x-2 opacity-80", className]}>
+  <IconCopy
+    class:list={[
+      "inline-block size-6 min-w-5.5",
+      { "scale-90": size === "sm" },
+    ]}
+  />
+  <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}>
+    {m.text_syndications()}
+  </span>
+  {
+    syndications.map((syndication, index) => (
+      <>
+        <a
+          class:list={[
+            "opacity-80 hover:text-accent",
+            "text-sm",
+            { "sm:text-base": size === "lg" },
+          ]}
+          href={syndication}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {new URL(syndication).hostname}
+        </a>
+        {index < syndications.length - 1 && <span>, </span>}
+      </>
+    ))
+  }
+</div>

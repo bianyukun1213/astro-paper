@@ -24,9 +24,11 @@ type Props = {
   pubDatetime: string | Date;
   timezone?: string;
   modDatetime?: string | Date | null;
+  isModified: boolean;
 };
 
 const {
+  isModified,
   pubDatetime,
   modDatetime,
   size = "sm",
@@ -35,13 +37,13 @@ const {
 } = Astro.props;
 
 /* ========== Formatted Datetime ========== */
-const isModified = modDatetime && modDatetime > pubDatetime;
+// const isModified = modDatetime && modDatetime > pubDatetime;
 
 const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(
   postTimezone || SITE.timezone
 );
 
-const date = datetime.format("lll"); // e.g., '22 Mar, 2025'
+const date = datetime.format("lll");
 ---
 
 <div class:list={["flex items-center gap-x-2 opacity-80", className]}>
@@ -52,14 +54,22 @@ const date = datetime.format("lll"); // e.g., '22 Mar, 2025'
     ]}
   />
   {
-    isModified && (
+    isModified ? (
       <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}>
         {m.text_updated()}
+      </span>
+    ) : (
+      <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}>
+        {m.text_published()}
       </span>
     )
   }
   <time
-    class:list={["text-sm", { "sm:text-base": size === "lg" }]}
+    class:list={[
+      isModified ? "dt-updated" : "dt-published",
+      "text-sm",
+      { "sm:text-base": size === "lg" },
+    ]}
     datetime={datetime.toISOString()}>{date}</time
   >
 </div>

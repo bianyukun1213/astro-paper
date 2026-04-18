@@ -1,5 +1,7 @@
+import { HAdrSchema, HCardSchema } from "@/utils/types";
 import { glob } from "astro/loaders";
-import { defineCollection, z } from "astro:content";
+import { z } from "astro/zod";
+import { defineCollection } from "astro:content";
 
 export const BLOG_PATH = "src/data/blog";
 
@@ -8,7 +10,7 @@ const blog = defineCollection({
   schema: ({ image }) =>
     z.object({
       displayId: z.string().optional(),
-      author: z.string(),
+      author: z.string().optional(),
       pubDatetime: z.date(),
       modDatetime: z.date().optional().nullable(),
       title: z.string(),
@@ -20,6 +22,9 @@ const blog = defineCollection({
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
+      hCard: HCardSchema.optional(),
+      hAdr: HAdrSchema.optional(),
+      syndications: z.array(z.string()).optional(),
     }),
 });
 

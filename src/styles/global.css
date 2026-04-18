@@ -125,9 +125,9 @@ html[lang="zh-CN"] {
   height: 100vh !important;
   background: red !important;
 }
-@utility h-* {
+/* @utility h-* {
   @apply height-do-not-use;
-}
+} */
 @utility h-auto {
   @apply height-do-not-use;
 }

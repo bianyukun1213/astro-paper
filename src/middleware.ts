@@ -18,7 +18,6 @@ export const imageProcessor = defineMiddleware(async (context, next) => {
   const response = await next();
   // 确保我们只处理 HTML 页面
   if (response.headers.get("content-type")?.includes("text/html")) {
-    console.log("Processing HTML for image figure ids: ", context.url.pathname);
     let html = await response.text();
     const safeSlug = slugify(context.url.pathname);
     let imgCounter = 0;

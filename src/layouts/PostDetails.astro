@@ -5,6 +5,7 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Tag from "@/components/Tag.astro";
 import Datetime from "@/components/Datetime.astro";
+import Author from "@/components/Author.astro";
 import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
 import BackButton from "@/components/BackButton.astro";
@@ -15,6 +16,9 @@ import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
 import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
 import { SITE } from "@/config";
 import { useTranslations, type Locale } from "@/utils/locale";
+import { getLocalizedHCard } from "@/constants";
+import HAdr from "@/components/HAdr.astro";
+import USyndications from "@/components/USyndications.astro";
 
 type Props = {
   post: CollectionEntry<"blog">;
@@ -25,7 +29,7 @@ const { post, posts } = Astro.props;
 
 const {
   title,
-  author,
+  // author,
   description,
   ogImage: initOgImage,
   canonicalURL,
@@ -34,12 +38,23 @@ const {
   timezone,
   tags,
   hideEditPost,
+  hAdr,
+  syndications,
 } = post.data;
 
 const { Content } = await render(post);
 
 const currentLocale = Astro.currentLocale as Locale;
 const m = useTranslations(currentLocale);
+
+let author = post.data.author;
+if (!author) {
+  author = m.site_author();
+}
+let hCard = post.data.hCard;
+if (!hCard) {
+  hCard = getLocalizedHCard(currentLocale);
+}
 
 let ogImageUrl: string | undefined;
 
@@ -71,6 +86,8 @@ const layoutProps = {
   scrollSmooth: true,
 };
 
+const isModified = modDatetime && modDatetime > pubDatetime;
+
 /* ========== Prev/Next Posts ========== */
 
 const allPosts = posts.map(({ data: { displayId, title }, id, filePath }) => ({
@@ -92,17 +109,43 @@ const nextPost =
   <BackButton />
   <main
     id="main-content"
-    class:list={["app-layout pb-12", { "mt-8": !SITE.showBackButton }]}
+    class:list={[
+      "h-entry",
+      "app-layout pb-12",
+      { "mt-8": !SITE.showBackButton },
+    ]}
     data-pagefind-body
   >
     <h1
       transition:name={slugifyStr(title.replaceAll(".", "-"))}
-      class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+      class="p-name inline-block text-2xl font-bold text-accent sm:text-3xl"
     >
       {title}
     </h1>
-    <div class="my-2 flex items-center gap-2">
-      <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+    <div class="my-2 flex flex-wrap items-center gap-2">
+      <a class="u-url hidden" href={Astro.url}>{Astro.url}</a>
+      <span class="p-summary hidden">{description}</span>
+      <Author {author} {hCard} size="lg" />
+      <Datetime
+        {pubDatetime}
+        {modDatetime}
+        {timezone}
+        isModified={false}
+        size="lg"
+      />
+      {
+        isModified && (
+          <Datetime
+            {pubDatetime}
+            {modDatetime}
+            {timezone}
+            isModified={true}
+            size="lg"
+          />
+        )
+      }
+      {syndications && <USyndications {syndications} size="lg" />}
+      {hAdr && <HAdr {hAdr} />}
       <span
         aria-hidden="true"
         class:list={[
@@ -114,7 +157,7 @@ const nextPost =
     </div>
     <article
       id="article"
-      class="app-prose mt-8 w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
+      class="e-content app-prose mt-8 w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
     >
       <Content />
     </article>
