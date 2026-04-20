@@ -46,24 +46,16 @@ const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(
 const date = datetime.format("lll");
 ---
 
-<div class:list={["flex items-center gap-x-2 opacity-80", className]}>
+<div
+  class:list={["flex items-center gap-x-2 opacity-80", className]}
+  title={isModified ? m.text_updated() : m.text_published()}
+>
   <IconCalendar
     class:list={[
       "inline-block size-6 min-w-5.5",
       { "scale-90": size === "sm" },
     ]}
   />
-  {
-    isModified ? (
-      <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}>
-        {m.text_updated()}
-      </span>
-    ) : (
-      <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}>
-        {m.text_published()}
-      </span>
-    )
-  }
   <time
     class:list={[
       isModified ? "dt-updated" : "dt-published",

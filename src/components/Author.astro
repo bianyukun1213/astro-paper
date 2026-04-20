@@ -11,24 +11,16 @@ type Props = {
   author: string;
   hCard: HCardType;
   class?: string;
-  size?: "sm" | "lg";
 };
 
-const { author, hCard, size = "sm", class: className = "" } = Astro.props;
+const { author, hCard, class: className = "" } = Astro.props;
 ---
 
-<div class:list={["flex items-center gap-x-2 opacity-80", className]}>
-  <IconUser
-    class:list={[
-      "inline-block size-6 min-w-5.5",
-      { "scale-90": size === "sm" },
-    ]}
-  />
-  <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}>
-    {m.text_author()}
-  </span>
-  <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}
-    >{author}</span
-  >
+<div
+  class:list={["flex items-center gap-x-2 opacity-80", className]}
+  title={m.text_author()}
+>
+  <IconUser class:list={["inline-block size-6 min-w-5.5"]} />
+  <span>{author}</span>
   <HCard {hCard} />
 </div>
